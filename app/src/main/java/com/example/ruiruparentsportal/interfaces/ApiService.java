@@ -20,8 +20,8 @@ public interface ApiService {
     @POST("register.php")
     Call<ParentResponse> registerParent(
             @Field("token") String token,
-            @Field("token") String name,
-            @Field("token") String email,
+            @Field("name") String name,
+            @Field("email") String email,
             @Field("phone") String phone,
             @Field("password") String password
     );
