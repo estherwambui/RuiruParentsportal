@@ -89,12 +89,13 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
                     m_password.setError("password must me 4 characters");
                     return;
                 }
-
+                registerParent(name, email, phone,password);
             }
         });
 
     }
-    private void RegisterUser(String name, String email, String phone, final String password) {
+
+    private void registerParent(String name, String email, String phone, final String password) {
         AppUtils.showView(registerProgressorbar);
         //Send login request to server - DONE
         //TODO: Remember to use md5 for password

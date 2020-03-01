@@ -13,15 +13,19 @@ public interface ApiService {
     Call<ParentResponse> loginParent(
             @Field("token") String token,
             @Field("phone") String phone,
+            @Field("token") String name,
+            @Field("token") String email,
             @Field("password") String password
+
+
     );
 
     @FormUrlEncoded
     @POST("register.php")
     Call<ParentResponse> registerParent(
             @Field("token") String token,
-            @Field("token") String name,
-            @Field("token") String email,
+            @Field("name") String name,
+            @Field("email") String email,
             @Field("phone") String phone,
             @Field("password") String password
     );
