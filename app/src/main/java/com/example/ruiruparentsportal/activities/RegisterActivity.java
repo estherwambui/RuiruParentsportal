@@ -102,10 +102,11 @@ public class RegisterActivity extends AppCompatActivity {
                 AppUtils.hideView(registerProgressorbar);
                 if (response.isSuccessful()) {
                     try {
-                        Parent parent = response.body().getParent();
-                        if (parent == null) {
-                            Toast.makeText(RegisterActivity.this, "data: " + response.body().getParent(), Toast.LENGTH_SHORT).show();
+                        if (response.body().isError()) {
+                            Toast.makeText(RegisterActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
+                            Parent parent = response.body().getParent();
+                            Toast.makeText(RegisterActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             SharedPrefsManager.getInstance(RegisterActivity.this).userLogin(parent.getName(),
                                     parent.getEmail(), parent.getPhone(), true);
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));

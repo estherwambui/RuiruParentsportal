@@ -61,7 +61,7 @@
                         android:id="@+id/edtName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Name" />
+                        android:hint="Full Name" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -104,7 +104,6 @@
                         android:id="@+id/edtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="4dp"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,12 +126,21 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <ProgressBar
+       <!-- <ProgressBar
             android:id="@+id/registerprogressorBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"  />-->
 
-            />
+        <ProgressBar
+            android:id="@+id/registerprogressorBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:elevation="8dp"
+            android:indeterminateTint="@color/white"
+            android:progressTint="@color/white"
+            android:visibility="gone" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
