@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.edtPasswordLogin);
         btnLogin = findViewById(R.id.btnLogin);
         loginProgressBar = findViewById(R.id.loginProgressBar);
-        createAccount= findViewById(R.id.tvCreateAccount);
+        createAccount = findViewById(R.id.tvCreateAccount);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                 AppUtils.hideView(loginProgressBar);
                 if (response.isSuccessful()) {
                     try {
-                        Parent parent = response.body().getParent();
-                        if (parent == null) {
-                            Toast.makeText(LoginActivity.this, "data: " + response.body().getParent(), Toast.LENGTH_SHORT).show();
+                        if (response.body().isError()) {
+                            Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
+                            Parent parent = response.body().getParent();
+                            Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             SharedPrefsManager.getInstance(LoginActivity.this).userLogin(parent.getName(),
                                     parent.getEmail(), parent.getPhone(), true);
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));

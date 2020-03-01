@@ -89,7 +89,6 @@
                         android:id="@+id/edtPasswordLogin"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="4dp"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
