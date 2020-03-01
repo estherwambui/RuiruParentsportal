@@ -13,8 +13,6 @@ public interface ApiService {
     Call<ParentResponse> loginParent(
             @Field("token") String token,
             @Field("phone") String phone,
-            @Field("token") String name,
-            @Field("token") String email,
             @Field("password") String password
 
 
