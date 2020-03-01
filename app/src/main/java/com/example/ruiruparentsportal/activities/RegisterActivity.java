@@ -67,12 +67,10 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
                 String name= m_name.getText().toString().trim();
                 String email= m_email.getText().toString().trim();
 
-
                 if (TextUtils.isEmpty(name)){
                     m_name.setError("Name is required");
                     return;
                 }
-
                 if (TextUtils.isEmpty(phone)){
                     m_phone.setError("Phone number is required");
                     return;
@@ -89,10 +87,9 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
                     m_password.setError("password must me 4 characters");
                     return;
                 }
-
+                RegisterUser(name, email, phone, password);
             }
         });
-
     }
     private void RegisterUser(String name, String email, String phone, final String password) {
         AppUtils.showView(registerProgressorbar);
