@@ -1,7 +1,5 @@
 package com.example.ruiruparentsportal.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.interfaces.ApiService;
@@ -24,13 +24,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity {  TextInputEditText phone, password;
+public class RegisterActivity extends AppCompatActivity {
+    TextInputEditText phone, password;
     Button btnregister;
     TextView login;
     ApiService service;
-    TextInputEditText m_name,m_email,m_phone,m_password;
+    TextInputEditText m_name, m_email, m_phone, m_password;
     ProgressBar registerProgressorbar;
-    private static final String TAG ="RegisterActivity";
+    private static final String TAG = "RegisterActivity";
 
 
     @Override
@@ -38,13 +39,13 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        btnregister= findViewById(R.id.btnRegister);
-        m_name= findViewById(R.id.edtName);
-        m_email= findViewById(R.id.edtEmail);
-        m_phone=findViewById(R.id.edtPhone);
-        m_password= findViewById(R.id.edtPassword);
-        registerProgressorbar= findViewById(R.id.registerprogressorBar);
-        login= findViewById(R.id.tvAlreadyHaveAnAccount);
+        btnregister = findViewById(R.id.btnRegister);
+        m_name = findViewById(R.id.edtName);
+        m_email = findViewById(R.id.edtEmail);
+        m_phone = findViewById(R.id.edtPhone);
+        m_password = findViewById(R.id.edtPassword);
+        registerProgressorbar = findViewById(R.id.registerprogressorBar);
+        login = findViewById(R.id.tvAlreadyHaveAnAccount);
 
 
         service = AppUtils.getApiService();
@@ -58,32 +59,31 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
         });
 
 
-
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone= m_phone.getText().toString().trim();
-                String password= m_password.getText().toString().trim();
-                String name= m_name.getText().toString().trim();
-                String email= m_email.getText().toString().trim();
+                String phone = m_phone.getText().toString().trim();
+                String password = m_password.getText().toString().trim();
+                String name = m_name.getText().toString().trim();
+                String email = m_email.getText().toString().trim();
 
-                if (TextUtils.isEmpty(name)){
+                if (TextUtils.isEmpty(name)) {
                     m_name.setError("Name is required");
                     return;
                 }
-                if (TextUtils.isEmpty(phone)){
+                if (TextUtils.isEmpty(phone)) {
                     m_phone.setError("Phone number is required");
                     return;
                 }
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     m_email.setError("email is required");
                     return;
                 }
-                if (TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     m_password.setError(" password is required");
                     return;
                 }
-                if (m_password.length()<4){
+                if (m_password.length() < 4) {
                     m_password.setError("password must me 4 characters");
                     return;
                 }
@@ -91,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
             }
         });
     }
+
     private void RegisterUser(String name, String email, String phone, final String password) {
         AppUtils.showView(registerProgressorbar);
         //Send login request to server - DONE
@@ -119,10 +120,11 @@ public class RegisterActivity extends AppCompatActivity {  TextInputEditText pho
                     Toast.makeText(RegisterActivity.this, "Error: " + response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             public void onFailure(Call<ParentResponse> call, Throwable t) {
                 AppUtils.hideView(registerProgressorbar);
                 Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-}
     }
+}
