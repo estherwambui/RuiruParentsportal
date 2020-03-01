@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     ApiService service;
     ProgressBar loginProgressBar;
+    TextView createAccount;
     private static final String TAG = "LoginActivity";
 
     @Override
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.edtPasswordLogin);
         btnLogin = findViewById(R.id.btnLogin);
         loginProgressBar = findViewById(R.id.loginProgressBar);
+        createAccount= findViewById(R.id.tvCreateAccount);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,14 @@ public class LoginActivity extends AppCompatActivity {
                         password.getText().toString().trim());
             }
         });
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+            }
+        });
+
 
     }
 
