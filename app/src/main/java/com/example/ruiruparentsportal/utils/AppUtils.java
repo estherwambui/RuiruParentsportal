@@ -41,7 +41,7 @@ public class AppUtils {
         return RetrofitClient.getClient(BASE_URL).create(ApiService.class);
     }
 
-    /*public static void displayToast(Activity activity, boolean isSuccess, String message) {
+   /* public static void displayToast(Activity activity, boolean isSuccess, String message) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View layout;
         Toast toast = new Toast(activity.getApplicationContext());
