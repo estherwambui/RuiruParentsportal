@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ResultsActivity">
-
+    tools:context=".FeeStructureActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
@@ -29,7 +28,6 @@
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -47,26 +45,6 @@
                 android:padding="16dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Student ADM">
-
-                    </TextView>
-
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </Spinner>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -135,7 +113,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Grade">
+                            android:textStyle="bold"
+                            android:text="Type of Fees">
 
                         </TextView>
 
@@ -145,7 +124,8 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:textStyle="bold"
+                            android:text="Amount">
 
                         </TextView>
                     </LinearLayout>
@@ -159,7 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Position">
+                            android:text="Tuition Fee">
 
                         </TextView>
 
@@ -184,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Mathematics">
+                            android:text="Registration">
 
                         </TextView>
 
@@ -208,7 +188,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="English"
+                            android:text="Library use"
                             android:layout_weight="1"
                             android:textSize="21sp">
 
@@ -235,7 +215,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Kiswahili">
+                            android:text="Activity Fee">
 
                         </TextView>
 
@@ -260,7 +240,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Chemistry">
+                            android:text="Examination Fee">
 
                         </TextView>
 
@@ -285,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Physics">
+                            android:text="Material Development">
 
                         </TextView>
 
@@ -311,7 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Biology">
+                            android:text="Mentorship Fee">
 
                         </TextView>
 
@@ -336,7 +316,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Agriculture">
+                            android:text="Caution Money">
 
                         </TextView>
 
@@ -361,7 +341,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Business Studies">
+                            android:text="Student ID">
 
                         </TextView>
 
@@ -386,7 +366,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="Home Science">
+                            android:text="Clubs and Societies">
 
                         </TextView>
 
@@ -411,7 +391,32 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
-                            android:text="CRE">
+                            android:text="Boarding Fee">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="21sp"
+                            android:gravity="end"
+                            android:text="A">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="21sp"
+                            android:text="Total Amount"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -436,16 +441,16 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:id="@+id/downloadResults"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_file_download_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/downloadFeeStructure"
+    android:layout_margin="16dp"
+    android:src="@drawable/ic_file_download_black_24dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    >
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+</com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
