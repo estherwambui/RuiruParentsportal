@@ -12,9 +12,6 @@ import com.example.ruiruparentsportal.R;
 
 public class MainActivity extends AppCompatActivity {
     CardView results,status,structure;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +32,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }
