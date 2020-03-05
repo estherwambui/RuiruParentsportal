@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         AppUtils.showView(loginProgressBar);
         //Send login request to server - DONE
         //TODO: Remember to use md5 for password
-        service.loginParent(AppUtils.LOGIN_TOKEN, phone, password).enqueue(new Callback<ParentResponse>() {
+        service.loginParent(AppUtils.LOGIN_TOKEN, phone, AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
             @Override
             public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
                 AppUtils.hideView(loginProgressBar);
