@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ResultsActivity">
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="204dp"
@@ -12,8 +13,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="RESULTS"
         android:gravity="center"
+        android:text="RESULTS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
@@ -35,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -44,6 +45,5 @@
             android:clickable="true"
             android:src="@android:drawable/stat_sys_download" />
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

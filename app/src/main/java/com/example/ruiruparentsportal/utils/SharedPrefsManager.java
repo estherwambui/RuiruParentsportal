@@ -55,9 +55,8 @@ public class SharedPrefsManager {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
 
-    public Boolean logoutUser() {
+    public void logoutUser() {
         sharedPreferences.edit().putBoolean("isLoggedIn", false).apply();
-        return true;
     }
 
     public void saveUserData(String serializedData) {

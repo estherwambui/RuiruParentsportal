@@ -13,19 +13,16 @@ public interface ApiService {
     Call<ParentResponse> loginParent(
             @Field("token") String token,
             @Field("phone") String phone,
-            @Field("password") String password
-
-
-    );
+            @Field("password") String password);
 
     @FormUrlEncoded
     @POST("register.php")
+
     /* Corrected this bug, now register is working :) */
     Call<ParentResponse> registerParent(
             @Field("token") String token,
             @Field("name") String name,
             @Field("email") String email,
             @Field("phone") String phone,
-            @Field("password") String password
-    );
+            @Field("password") String password);
 }
