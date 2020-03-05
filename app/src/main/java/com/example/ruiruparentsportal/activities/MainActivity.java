@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(MainActivity.this,ResultsActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         structure.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(MainActivity.this, FeeStructureActivity.class);
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -46,16 +44,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(MainActivity.this, FeeStatusActivity.class);
                 startActivity(intent);
-                finish();
 
             }
         });
         news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this, FeeStatusActivity.class);
+                Intent intent= new Intent(MainActivity.this,NewsActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
