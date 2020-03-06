@@ -197,6 +197,7 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvMaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -223,6 +224,7 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvEng"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -252,6 +254,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:id="@+id/tvKisw"
                             android:textSize="21sp"
                             android:text="A">
 
@@ -277,6 +280,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:id="@+id/tvChem"
                             android:textSize="21sp"
                             android:text="A">
 
@@ -303,7 +307,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-
+                            android:id="@+id/tvPhy"
                             android:text="A">
 
                         </TextView>
@@ -327,6 +331,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:id="@+id/tvBio"
                             android:textSize="21sp"
                             android:gravity="end"
                             android:text="A">
@@ -352,6 +357,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:id="@+id/tvAgri"
                             android:textSize="21sp"
                             android:gravity="end"
                             android:text="A">
@@ -378,6 +384,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
+                            android:id="@+id/tvBusiness"
                             android:gravity="end"
                             android:text="A">
 
@@ -404,6 +411,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
+                            android:id="@+id/tvHomSci"
                             android:text="A">
 
                         </TextView>
@@ -428,6 +436,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="21sp"
+                            android:id="@+id/tvCre"
                             android:gravity="end"
                             android:text="A">
 
@@ -453,6 +462,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
+                            android:id="@+id/tvHist"
                             android:text="A">
 
                         </TextView>
@@ -477,6 +487,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
+                            android:id="@+id/tvGeo"
                             android:text="A">
 
                         </TextView>
