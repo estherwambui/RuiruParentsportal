@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Ruiru Parents portal</string>
     <string name="results">Results</string>
+
+    <string-array name="students">
+        <item>Esther Wambui</item>
+        <item>Joseph Noblepal</item>
+        <item>Jane Njeri</item>
+    </string-array>
+
+    <string-array name="terms">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="forms">
+        <item>Form 1</item>
+        <item>Form 2</item>
+        <item>Form 3</item>
+        <item>Form 4</item>
+    </string-array>
 </resources>

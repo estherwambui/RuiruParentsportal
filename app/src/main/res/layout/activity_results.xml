@@ -61,7 +61,10 @@
                     </TextView>
 
                     <Spinner
-                        android:layout_width="wrap_content"
+                        android:entries="@array/students"
+                        android:layout_width="100dp"
+                        android:id="@+id/spinnerName"
+                        android:prompt="@array/students"
                         android:layout_height="wrap_content">
 
                     </Spinner>
@@ -82,7 +85,10 @@
                     </TextView>
 
                     <Spinner
-                        android:layout_width="wrap_content"
+                        android:prompt="@array/terms"
+                        android:entries="@array/terms"
+                        android:id="@+id/spinnerTerm"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content">
 
                     </Spinner>
@@ -103,9 +109,11 @@
                     </TextView>
 
                     <Spinner
-                        android:layout_width="wrap_content"
+                        android:prompt="@array/forms"
+                        android:entries="@array/forms"
+                        android:id="@+id/spinnerForm"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content">
-
                     </Spinner>
 
                 </LinearLayout>
