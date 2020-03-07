@@ -3,9 +3,9 @@
     <string name="results">Results</string>
 
     <string-array name="students">
-        <item>Esther Wambui</item>
-        <item>Joseph Noblepal</item>
-        <item>Jane Njeri</item>
+        <item>2009</item>
+        <item>7990</item>
+        <item>4857</item>
     </string-array>
 
     <string-array name="terms">

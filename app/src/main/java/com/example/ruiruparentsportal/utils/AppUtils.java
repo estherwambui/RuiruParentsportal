@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import com.example.ruiruparentsportal.interfaces.ApiService;
 import com.example.ruiruparentsportal.R;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
@@ -32,9 +33,11 @@ public class AppUtils {
     //Tokens
     public static final String LOGIN_TOKEN = "login_token";
     public static final String REGISTER_TOKEN = "register_token";
+    public static final String GET_MY_STUDENTS_TOKEN = "get_my_students_token";
 
     private static final String TAG = "AppUtils";
-    private static final String BASE_URL = "http://icelabs-eeyan.com/essie-parent-portal/";
+    private static final String BASE_URL_OLD = "http://icelabs-eeyan.com/essie-parent-portal/";
+    private static final String BASE_URL = "http://icelabs-eeyan.com/parent-portal/";
 
 
     public static ApiService getApiService() {
@@ -61,17 +64,24 @@ public class AppUtils {
     public static String md5(String s) {
         try {
             // Create MD5 Hash
-            MessageDigest digest = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(s.getBytes("UTF-8"));
+            BigInteger hash = new BigInteger(1, md.digest());
+            String result = hash.toString(16);
+            if ((result.length() % 2) != 0) {
+                result = "0" + result;
+            }
+            /*MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(s.getBytes());
             byte[] messageDigest = digest.digest();
 
             // Create Hex String
             StringBuilder hexString = new StringBuilder();
             for (byte b : messageDigest) hexString.append(Integer.toHexString(0xFF & b));
-            //Log.d(TAG, "md5: " + hexString.toString());
-            return hexString.toString();
+            //Log.d(TAG, "md5: " + hexString.toString());*/
+            return result;
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";

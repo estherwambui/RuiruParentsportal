@@ -26,6 +26,17 @@
                 android:textColor="@color/white"
                 android:textSize="21sp" />
 
+            <ImageButton
+                android:id="@+id/btnDownloadResults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_file_download_black_24dp"
+                android:tint="@color/white" />
+
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -41,160 +52,198 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Student ADM">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Student ADM" />
 
-                    <Spinner
-                        android:entries="@array/students"
-                        android:layout_width="100dp"
-                        android:id="@+id/spinnerName"
-                        android:prompt="@array/students"
-                        android:layout_height="wrap_content">
+                        <Spinner
+                            android:id="@+id/spinnerName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/students"
+                            android:prompt="@array/students" />
 
-                    </Spinner>
+                    </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Term">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Term" />
 
-                    <Spinner
-                        android:prompt="@array/terms"
-                        android:entries="@array/terms"
-                        android:id="@+id/spinnerTerm"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content">
+                        <Spinner
+                            android:id="@+id/spinnerTerm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/terms"
+                            android:prompt="@array/terms" />
 
-                    </Spinner>
+                    </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Form">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Form" />
 
-                    <Spinner
-                        android:prompt="@array/forms"
-                        android:entries="@array/forms"
-                        android:id="@+id/spinnerForm"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content">
-                    </Spinner>
+                        <Spinner
+                            android:id="@+id/spinnerForm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/forms"
+                            android:prompt="@array/forms" />
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnGetResults"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_arrow_forward" />
 
                 </LinearLayout>
-
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="3dp">
-
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="39dp"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Grade">
-
-                        </TextView>
+                            android:text="Mean Grade"
+                            android:textSize="21sp" />
 
                         <TextView
+                            android:id="@+id/tvMeanGrade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:text="A"
+                            android:textColor="@color/red"
                             android:textSize="21sp"
-                            android:text="Position">
-
-                        </TextView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:gravity="end"
-                            android:text="1">
-
-                        </TextView>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="39dp"
+                        android:layout_height="40dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="Position"
+                            android:textSize="21sp" />
+
+                        <TextView
+                            android:id="@+id/tvPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="1"
+                            android:textColor="@color/green"
                             android:textSize="21sp"
-                            android:text="Mathematics">
+                            android:textStyle="bold">
 
                         </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Subject Grades"
+                            android:textColor="@color/grey"
+                            android:textStyle="italic" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@color/grey" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Mathematics"
+                            android:textSize="21sp" />
 
                         <TextView
                             android:id="@+id/tvMaths"
@@ -202,11 +251,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
                             android:textSize="21sp"
-
-                            android:text="A">
-
-                        </TextView>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -217,22 +265,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="English"
                             android:layout_weight="1"
-                            android:textSize="21sp">
-
-                        </TextView>
+                            android:text="English"
+                            android:textSize="21sp" />
 
                         <TextView
                             android:id="@+id/tvEng"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -244,21 +290,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Kiswahili">
-
-                        </TextView>
+                            android:text="Kiswahili"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
                             android:id="@+id/tvKisw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
                             android:textSize="21sp"
-                            android:text="A">
-
-                        </TextView>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -270,21 +314,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Chemistry">
-
-                        </TextView>
+                            android:text="Chemistry"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
                             android:id="@+id/tvChem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
                             android:textSize="21sp"
-                            android:text="A">
-
-                        </TextView>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -296,21 +338,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Physics">
-
-                        </TextView>
+                            android:text="Physics"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:textSize="21sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
                             android:id="@+id/tvPhy"
-                            android:text="A">
-
-                        </TextView>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -322,21 +362,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Biology">
-
-                        </TextView>
+                            android:text="Biology"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:id="@+id/tvBio"
-                            android:textSize="21sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -348,21 +386,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Agriculture">
-
-                        </TextView>
+                            android:text="Agriculture"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:id="@+id/tvAgri"
-                            android:textSize="21sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -374,21 +410,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Business Studies">
-
-                        </TextView>
+                            android:text="Business Studies"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="21sp"
                             android:id="@+id/tvBusiness"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -400,21 +434,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Home Science">
-
-                        </TextView>
+                            android:text="Home Science"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:gravity="end"
                             android:id="@+id/tvHomSci"
-                            android:text="A">
-
-                        </TextView>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -426,22 +458,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="CRE">
-
-                        </TextView>
+                            android:text="CRE"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="21sp"
                             android:id="@+id/tvCre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -451,22 +482,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="History">
-
-                        </TextView>
+                            android:text="History"
+                            android:textSize="21sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:gravity="end"
                             android:id="@+id/tvHist"
-                            android:text="A">
-
-                        </TextView>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -476,21 +506,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
-                            android:text="Geography">
-
-                        </TextView>
+                            android:text="Geography"
+                            android:textSize="21sp" />
 
                         <TextView
+                            android:id="@+id/tvGeo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="21sp"
                             android:gravity="end"
-                            android:id="@+id/tvGeo"
-                            android:text="A">
-
-                        </TextView>
+                            android:text="A"
+                            android:textColor="@color/black"
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -502,17 +530,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:id="@+id/downloadResults"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_file_download_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

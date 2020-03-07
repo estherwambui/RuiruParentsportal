@@ -33,13 +33,18 @@ public class SharedPrefsManager {
         return mInstance;
     }
 
-    public void userLogin(String name, String email, String phone, Boolean isLoggedIn) {
+    public void userLogin(Integer id, String name, String email, String phone, Boolean isLoggedIn) {
         sharedPreferences.edit()
+                .putInt("parent_id", id)
                 .putString("name", name)
                 .putString("email", email)
                 .putString("phone", phone)
                 .putBoolean("isLoggedIn", isLoggedIn)
                 .apply();
+    }
+
+    public Integer getParentId(){
+        return sharedPreferences.getInt("parent_id", 0);
     }
 
     public String[] getUserInformation() {

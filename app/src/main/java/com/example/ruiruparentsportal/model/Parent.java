@@ -6,6 +6,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Parent {
+    @SerializedName("id")
+    @Expose
+    Integer id;
+
     @SerializedName("name")
     @Expose
     String name;
@@ -18,10 +22,18 @@ public class Parent {
     @Expose
     String phone;
 
-    public Parent(String name, String email, String phone) {
+    public Parent(String id, String name, String email, String phone) {
         this.name = name;
         this.email = email;
         this.phone = phone;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

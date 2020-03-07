@@ -96,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         AppUtils.showView(registerProgressorbar);
         //Send login request to server - DONE
         //TODO: Remember to use md5 for password
-        service.registerParent(AppUtils.REGISTER_TOKEN, name, email, phone,AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
+        service.registerParent(AppUtils.REGISTER_TOKEN, name, email, phone, AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
             @Override
             public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
                 AppUtils.hideView(registerProgressorbar);
@@ -107,8 +107,12 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             Parent parent = response.body().getParent();
                             Toast.makeText(RegisterActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            SharedPrefsManager.getInstance(RegisterActivity.this).userLogin(parent.getName(),
-                                    parent.getEmail(), parent.getPhone(), true);
+                            SharedPrefsManager.getInstance(RegisterActivity.this).userLogin(
+                                    parent.getId(),
+                                    parent.getName(),
+                                    parent.getEmail(),
+                                    parent.getPhone(),
+                                    true);
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                             finish();
                         }

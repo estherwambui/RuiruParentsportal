@@ -2,6 +2,7 @@ package com.example.ruiruparentsportal.interfaces;
 
 import com.example.ruiruparentsportal.response.ParentResponse;
 import com.example.ruiruparentsportal.response.ResultsResponse;
+import com.example.ruiruparentsportal.response.StudentResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -30,9 +31,16 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("functions.php")
+    Call<StudentResponse> getMyStudents(
+            @Field("token") String token,
+            @Field("parent_id") Integer id
+    );
+
+    @FormUrlEncoded
+    @POST("functions.php")
     Call<ResultsResponse> getResults(
             @Field("token") String token,
-            @Field("student_id") Integer id,
+            @Field("adm_no") Integer admNo,
             @Field("form") Integer form,
             @Field("term") Integer term
     );

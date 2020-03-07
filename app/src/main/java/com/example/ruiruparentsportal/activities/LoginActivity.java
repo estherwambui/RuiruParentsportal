@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Parent parent = response.body().getParent();
                             Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            SharedPrefsManager.getInstance(LoginActivity.this).userLogin(parent.getName(),
+                            SharedPrefsManager.getInstance(LoginActivity.this).userLogin(parent.getId(), parent.getName(),
                                     parent.getEmail(), parent.getPhone(), true);
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
