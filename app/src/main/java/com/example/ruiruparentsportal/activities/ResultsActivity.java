@@ -34,12 +34,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.ruiruparentsportal.utils.AppUtils.splitThis;
+
 public class ResultsActivity extends AppCompatActivity {
 
     private Spinner stName, term, form;
     private Integer spTerm, spForm, studentAdmNo;
     private ApiService service;
-    private TextView math, eng, kisw, chem, phy, bio, hist, geo, agri, home_scie, business, cre;
+    private TextView tvMeanGrade, math, eng, kisw, chem, phy, bio, hist, geo, agri, home_scie, business, cre;
     private ImageButton btnGetResults;
 
     @Override
@@ -58,6 +60,7 @@ public class ResultsActivity extends AppCompatActivity {
         term = findViewById(R.id.spinnerTerm);
         form = findViewById(R.id.spinnerForm);
 
+        tvMeanGrade = findViewById(R.id.tvMeanGrade);
         math = findViewById(R.id.tvMaths);
         eng = findViewById(R.id.tvEng);
         kisw = findViewById(R.id.tvKisw);
@@ -75,8 +78,7 @@ public class ResultsActivity extends AppCompatActivity {
         stName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Student selectedStudent = (Student) parent.getSelectedItem();
-                studentAdmNo = selectedStudent.getAdmNo();
+                studentAdmNo = Integer.valueOf(parent.getSelectedItem().toString());
             }
 
             @Override
@@ -157,8 +159,8 @@ public class ResultsActivity extends AppCompatActivity {
     private void populateSpinner(List<Student> myStudents) {
         try {
             ArrayAdapter<Student> studentSpinner = new ArrayAdapter<>(ResultsActivity.this,
-                    android.R.layout.simple_dropdown_item_1line, myStudents);
-            studentSpinner.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                    android.R.layout.simple_spinner_item, myStudents);
+            studentSpinner.setDropDownViewResource(android.R.layout.simple_spinner_item);
             stName.setAdapter(studentSpinner);
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,6 +183,7 @@ public class ResultsActivity extends AppCompatActivity {
                         }
                     }
                 } else {
+                    Toast.makeText(ResultsActivity.this, response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                     showErrorAlertDialog("Could not retrieve results at the moment. Please try again later.", true, true);
                 }
             }
@@ -226,18 +229,19 @@ public class ResultsActivity extends AppCompatActivity {
 
     private void populateFields(Result result) {
         try {
-            math.setText(result.getMaths() != 0 ? String.valueOf(result.getMaths()) : returnNA());
-            eng.setText(result.getEnglish() != 0 ? String.valueOf(result.getEnglish()) : returnNA());
-            kisw.setText(result.getKiswahili() != 0 ? String.valueOf(result.getKiswahili()) : returnNA());
-            chem.setText(result.getChemistry() != 0 ? String.valueOf(result.getChemistry()) : returnNA());
-            phy.setText(result.getPhysics() != 0 ? String.valueOf(result.getPhysics()) : returnNA());
-            bio.setText(result.getBiology() != 0 ? String.valueOf(result.getBiology()) : returnNA());
-            hist.setText(result.getHistory() != 0 ? String.valueOf(result.getHistory()) : returnNA());
-            geo.setText(result.getGeography() != 0 ? String.valueOf(result.getGeography()) : returnNA());
-            agri.setText(result.getAgriculture() != 0 ? String.valueOf(result.getAgriculture()) : returnNA());
-            business.setText(result.getBusiness() != 0 ? String.valueOf(result.getBusiness()) : returnNA());
-            cre.setText(result.getCre() != 0 ? String.valueOf(result.getCre()) : returnNA());
-            home_scie.setText(result.getHomeScience() != 0 ? String.valueOf(result.getHomeScience()) : returnNA());
+            tvMeanGrade.setText(result.getMean());
+            math.setText(!splitThis(result.getMaths())[0].equals("0") ? String.valueOf(result.getMaths()) : returnNA());
+            eng.setText(!splitThis(result.getEnglish())[0].equals("0")  ? String.valueOf(result.getEnglish()) : returnNA());
+            kisw.setText(!splitThis(result.getKiswahili())[0].equals("0") ? String.valueOf(result.getKiswahili()) : returnNA());
+            chem.setText(!splitThis(result.getChemistry())[0].equals("0") ? String.valueOf(result.getChemistry()) : returnNA());
+            phy.setText(!splitThis(result.getPhysics())[0].equals("0")  ? String.valueOf(result.getPhysics()) : returnNA());
+            bio.setText(!splitThis(result.getBiology())[0].equals("0") ? String.valueOf(result.getBiology()) : returnNA());
+            hist.setText(!splitThis(result.getHistory())[0].equals("0") ? String.valueOf(result.getHistory()) : returnNA());
+            geo.setText(!splitThis(result.getGeography())[0].equals("0") ? String.valueOf(result.getGeography()) : returnNA());
+            agri.setText(!splitThis(result.getAgriculture())[0].equals("0") ? String.valueOf(result.getAgriculture()) : returnNA());
+            business.setText(!splitThis(result.getBusiness())[0].equals("0") ? String.valueOf(result.getBusiness()) : returnNA());
+            cre.setText(!splitThis(result.getCre())[0].equals("0") ? String.valueOf(result.getCre()) : returnNA());
+            home_scie.setText(!splitThis(result.getHomeScience())[0].equals("0") ? String.valueOf(result.getHomeScience()) : returnNA());
         } catch (Exception e) {
             e.printStackTrace();
         }

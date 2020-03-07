@@ -127,6 +127,10 @@ public class AppUtils {
         }
     }
 
+    public static String[] splitThis(String raw){
+        return raw.split(" ");
+    }
+
     public static String FormatCurrency(int raw) {
         String raw_str = String.valueOf(raw);
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());

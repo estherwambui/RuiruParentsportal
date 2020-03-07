@@ -22,7 +22,8 @@ public class Parent {
     @Expose
     String phone;
 
-    public Parent(String id, String name, String email, String phone) {
+    public Parent(Integer id, String name, String email, String phone) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;

@@ -9,51 +9,51 @@ public class Result implements Serializable {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("student_id")
+    @SerializedName("adm_no")
     @Expose
-    private Integer studentId;
+    private Integer adm_no;
     @SerializedName("maths")
     @Expose
-    private Integer maths;
+    private String maths;
     @SerializedName("english")
     @Expose
-    private Integer english;
+    private String english;
     @SerializedName("kiswahili")
     @Expose
-    private Integer kiswahili;
+    private String kiswahili;
     @SerializedName("chemistry")
     @Expose
-    private Integer chemistry;
+    private String chemistry;
     @SerializedName("physics")
     @Expose
-    private Integer physics;
+    private String physics;
     @SerializedName("biology")
     @Expose
-    private Integer biology;
+    private String biology;
     @SerializedName("history")
     @Expose
-    private Integer history;
+    private String history;
     @SerializedName("geography")
     @Expose
-    private Integer geography;
+    private String geography;
     @SerializedName("agriculture")
     @Expose
-    private Integer agriculture;
+    private String agriculture;
     @SerializedName("business")
     @Expose
-    private Integer business;
+    private String business;
     @SerializedName("home_science")
     @Expose
-    private Integer homeScience;
+    private String homeScience;
     @SerializedName("cre")
     @Expose
-    private Integer cre;
+    private String cre;
     @SerializedName("total")
     @Expose
-    private Integer total;
+    private String total;
     @SerializedName("mean")
     @Expose
-    private Integer mean;
+    private String mean;
     @SerializedName("grade")
     @Expose
     private String grade;
@@ -75,123 +75,123 @@ public class Result implements Serializable {
         this.id = id;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getAdm_no() {
+        return adm_no;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setAdm_no(Integer adm_no) {
+        this.adm_no = adm_no;
     }
 
-    public Integer getMaths() {
+    public String getMaths() {
         return maths;
     }
 
-    public void setMaths(Integer maths) {
+    public void setMaths(String maths) {
         this.maths = maths;
     }
 
-    public Integer getEnglish() {
+    public String getEnglish() {
         return english;
     }
 
-    public void setEnglish(Integer english) {
+    public void setEnglish(String english) {
         this.english = english;
     }
 
-    public Integer getKiswahili() {
+    public String getKiswahili() {
         return kiswahili;
     }
 
-    public void setKiswahili(Integer kiswahili) {
+    public void setKiswahili(String kiswahili) {
         this.kiswahili = kiswahili;
     }
 
-    public Integer getChemistry() {
+    public String getChemistry() {
         return chemistry;
     }
 
-    public void setChemistry(Integer chemistry) {
+    public void setChemistry(String chemistry) {
         this.chemistry = chemistry;
     }
 
-    public Integer getPhysics() {
+    public String getPhysics() {
         return physics;
     }
 
-    public void setPhysics(Integer physics) {
+    public void setPhysics(String physics) {
         this.physics = physics;
     }
 
-    public Integer getBiology() {
+    public String getBiology() {
         return biology;
     }
 
-    public void setBiology(Integer biology) {
+    public void setBiology(String biology) {
         this.biology = biology;
     }
 
-    public Integer getHistory() {
+    public String getHistory() {
         return history;
     }
 
-    public void setHistory(Integer history) {
+    public void setHistory(String history) {
         this.history = history;
     }
 
-    public Integer getGeography() {
+    public String getGeography() {
         return geography;
     }
 
-    public void setGeography(Integer geography) {
+    public void setGeography(String geography) {
         this.geography = geography;
     }
 
-    public Integer getAgriculture() {
+    public String getAgriculture() {
         return agriculture;
     }
 
-    public void setAgriculture(Integer agriculture) {
+    public void setAgriculture(String agriculture) {
         this.agriculture = agriculture;
     }
 
-    public Integer getBusiness() {
+    public String getBusiness() {
         return business;
     }
 
-    public void setBusiness(Integer business) {
+    public void setBusiness(String business) {
         this.business = business;
     }
 
-    public Integer getHomeScience() {
+    public String getHomeScience() {
         return homeScience;
     }
 
-    public void setHomeScience(Integer homeScience) {
+    public void setHomeScience(String homeScience) {
         this.homeScience = homeScience;
     }
 
-    public Integer getCre() {
+    public String getCre() {
         return cre;
     }
 
-    public void setCre(Integer cre) {
+    public void setCre(String cre) {
         this.cre = cre;
     }
 
-    public Integer getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
-    public Integer getMean() {
+    public String getMean() {
         return mean;
     }
 
-    public void setMean(Integer mean) {
+    public void setMean(String mean) {
         this.mean = mean;
     }
 
