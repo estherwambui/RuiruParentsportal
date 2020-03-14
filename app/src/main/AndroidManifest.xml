@@ -14,16 +14,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FeeStatusActivity"/>
-        <activity android:name=".FeeStructureActivity" />
-        <activity android:name=".activities.NewsActivity" />
-        <activity android:name=".activities.ResultsActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".FeeStatusActivity" />
+        <activity android:name=".FeeStructureActivity" />
+        <activity android:name=".activities.NewsActivity" />
+        <activity android:name=".activities.LoginActivity">
+
         </activity>
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.MainActivity" />

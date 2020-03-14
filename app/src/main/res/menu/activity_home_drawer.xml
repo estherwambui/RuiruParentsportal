@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_results"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Results" />
+
+        <item
+            android:id="@+id/nav_fee_status"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Fees Status" />
+
+        <item
+            android:id="@+id/nav_fee_structure"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Fees Structure" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="News And Events" />
+    </group>
+</menu>

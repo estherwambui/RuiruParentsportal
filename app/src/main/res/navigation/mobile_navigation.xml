@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.ruiruparentsportal.fragments.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_results"
+        android:name="com.example.ruiruparentsportal.fragments.ResultsFragment"
+        android:label="Results"
+        tools:layout="@layout/fragment_results" />
+
+    <fragment
+        android:id="@+id/nav_fee_status"
+        android:name="com.example.ruiruparentsportal.fragments.FeeStatusFragment"
+        android:label="Fees Status"
+        tools:layout="@layout/fragment_fee_status">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fee_structure"
+        android:name="com.example.ruiruparentsportal.fragments.FeeStructureFragment"
+        android:label="Fees Structure"
+        tools:layout="@layout/fragment_fee_structure">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_news"
+        android:name="com.example.ruiruparentsportal.fragments.NewsAndEventsFragment"
+        android:label="News And Events"
+        tools:layout="@layout/fragment_news">
+
+    </fragment>
+
+</navigation>

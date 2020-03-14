@@ -24,37 +24,6 @@ public class MainActivity extends AppCompatActivity {
         structure=findViewById(R.id.fstructure);
         news=findViewById(R.id.news);
 
-        results.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,ResultsActivity.class);
-                startActivity(intent);
-            }
-        });
-        structure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this, FeeStructureActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this, FeeStatusActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,NewsActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 }

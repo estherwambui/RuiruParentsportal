@@ -3,54 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.ResultsActivity">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/mainToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+    <ProgressBar
+        android:id="@+id/resultsProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="21sp" />
-
-            <ImageButton
-                android:id="@+id/btnDownloadResults"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="16dp"
-                android:background="@color/transparent"
-                android:src="@drawable/ic_file_download_black_24dp"
-                android:tint="@color/white" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -78,13 +54,29 @@
                             android:layout_height="wrap_content"
                             android:text="Student ADM" />
 
-                        <Spinner
-                            android:id="@+id/spinnerName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:entries="@array/students"
-                            android:prompt="@array/students" />
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
 
+                            <ProgressBar
+                                android:id="@+id/spinnerProgressBar"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="2dp"
+                                android:elevation="1dp"
+                                android:indeterminateTint="@color/colorPrimary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Spinner
+                                android:id="@+id/spinnerName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -144,7 +136,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp">
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -170,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/red"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -194,7 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="1"
+                            android:text="-"
                             android:textColor="@color/green"
                             android:textSize="21sp"
                             android:textStyle="bold">
@@ -252,7 +245,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -276,7 +269,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -300,7 +293,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -324,7 +317,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -348,7 +341,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -372,7 +365,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -396,7 +389,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -420,7 +413,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -444,7 +437,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -468,7 +461,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -492,7 +485,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -516,7 +509,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="A"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="21sp"
                             android:textStyle="bold" />
@@ -527,9 +520,15 @@
 
             </androidx.cardview.widget.CardView>
 
-
+            <Button
+                android:id="@+id/btnDownloadResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="Download Transcript" />
         </LinearLayout>
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

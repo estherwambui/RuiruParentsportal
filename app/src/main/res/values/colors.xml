@@ -10,4 +10,5 @@
     <color name="green">#66BB6A</color>
     <color name="maroon">#A35151</color>
     <color name="transparent">#00000000</color>
+    <color name="black_overlay">#99000000</color>
 </resources>

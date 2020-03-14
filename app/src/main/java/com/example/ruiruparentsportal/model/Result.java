@@ -66,6 +66,9 @@ public class Result implements Serializable {
     @SerializedName("position")
     @Expose
     private Integer position;
+    @SerializedName("students")
+    @Expose
+    private Integer students;
 
     public Integer getId() {
         return id;
@@ -225,5 +228,13 @@ public class Result implements Serializable {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    public Integer getStudents() {
+        return students;
+    }
+
+    public void setStudents(Integer students) {
+        this.students = students;
     }
 }
