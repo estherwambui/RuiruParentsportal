@@ -3,13 +3,8 @@ package com.example.ruiruparentsportal.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
 
-import com.example.ruiruparentsportal.FeeStatusActivity;
-import com.example.ruiruparentsportal.FeeStructureActivity;
 import com.example.ruiruparentsportal.R;
 
 public class MainActivity extends AppCompatActivity {
