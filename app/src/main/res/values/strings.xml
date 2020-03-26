@@ -30,4 +30,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mission">The school will promote holistic learning for all the deserving students that will have been selected country wide on the basis over academic ability and character, and become the leading school in Kenya, Africa and beyond, in the provision of quality education.</string>
+    <string name="vision">To graduate students who will be strong in mind, body and character, who will serve their fellows faithfully in Kenya, Africa and beyond.</string>
+    <string name="esther">By Esther Irungu</string>
+    <string name="about">This App retrieves student information for Ruiru Girls\' High School.</string>
 </resources>

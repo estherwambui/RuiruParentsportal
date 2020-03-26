@@ -44,4 +44,12 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.example.ruiruparentsportal.fragments.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about">
+
+    </fragment>
+
 </navigation>

@@ -20,7 +20,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("register.php")
 
-    /* Corrected this bug, now register is working :) */
+        /* Corrected this bug, now register is working :) */
     Call<ParentResponse> registerParent(
             @Field("token") String token,
             @Field("name") String name,

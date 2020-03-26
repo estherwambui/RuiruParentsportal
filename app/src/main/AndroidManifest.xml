@@ -17,19 +17,15 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.NewsActivity" />
-        <activity android:name=".activities.LoginActivity">
-
-        </activity>
         <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>

@@ -43,7 +43,7 @@ public class SharedPrefsManager {
                 .apply();
     }
 
-    public Integer getParentId(){
+    public Integer getParentId() {
         return sharedPreferences.getInt("parent_id", 0);
     }
 

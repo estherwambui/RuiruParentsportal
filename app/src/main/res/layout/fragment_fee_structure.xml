@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-      >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,6 +105,7 @@
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="39dp"
@@ -154,7 +152,7 @@
                             android:gravity="end"
                             android:textSize="21sp"
 
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -179,7 +177,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -204,7 +202,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
                             android:textSize="21sp"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -229,7 +227,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
                             android:textSize="21sp"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -255,7 +253,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
 
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -280,7 +278,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -305,7 +303,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -330,7 +328,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -355,7 +353,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -380,10 +378,11 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -405,7 +404,7 @@
                             android:layout_weight="1"
                             android:textSize="21sp"
                             android:gravity="end"
-                            android:text="A">
+                            android:text="345">
 
                         </TextView>
                     </LinearLayout>
@@ -420,16 +419,5 @@
 
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/downloadFeeStructure"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_file_download_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

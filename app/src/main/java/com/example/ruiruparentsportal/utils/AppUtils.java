@@ -12,12 +12,11 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.ruiruparentsportal.interfaces.ApiService;
 import com.example.ruiruparentsportal.R;
+import com.example.ruiruparentsportal.interfaces.ApiService;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -127,7 +126,7 @@ public class AppUtils {
         }
     }
 
-    public static String[] splitThis(String raw){
+    public static String[] splitThis(String raw) {
         return raw.split(" ");
     }
 

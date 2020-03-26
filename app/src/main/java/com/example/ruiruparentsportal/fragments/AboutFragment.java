@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ruiruparentsportal.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FeeStatusFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
-    public FeeStatusFragment() {
+    public AboutFragment() {
         // Required empty public constructor
     }
 
@@ -23,6 +24,6 @@ public class FeeStatusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fee_status, container, false);
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
 }

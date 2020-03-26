@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ruiruparentsportal.HomeActivity;
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.interfaces.ApiService;
 import com.example.ruiruparentsportal.model.Parent;
@@ -113,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     parent.getEmail(),
                                     parent.getPhone(),
                                     true);
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                             finish();
                         }
                     } catch (Exception e) {

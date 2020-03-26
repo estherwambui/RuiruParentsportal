@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ruiruparentsportal.HomeActivity;
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.interfaces.ApiService;
 import com.example.ruiruparentsportal.model.Parent;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkIfIsLoggedIn() {
         if (SharedPrefsManager.getInstance(LoginActivity.this).loginCheck()) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
     }
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             SharedPrefsManager.getInstance(LoginActivity.this).userLogin(parent.getId(), parent.getName(),
                                     parent.getEmail(), parent.getPhone(), true);
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             finish();
                         }
                     } catch (Exception e) {
