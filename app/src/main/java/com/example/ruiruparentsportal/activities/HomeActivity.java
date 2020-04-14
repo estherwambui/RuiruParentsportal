@@ -15,8 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import com.example.ruiruparentsportal.AccountActivity;
 import com.example.ruiruparentsportal.R;
-import com.example.ruiruparentsportal.activities.LoginActivity;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_account:
-                startActivity(new Intent(HomeActivity.this,AccountActivity.class));
+                startActivity(new Intent(HomeActivity.this, AccountActivity.class));
                 break;
             case R.id.action_settings:
 
