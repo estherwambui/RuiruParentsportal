@@ -11,4 +11,5 @@
     <color name="maroon">#A35151</color>
     <color name="transparent">#00000000</color>
     <color name="black_overlay">#99000000</color>
+    <color name="blue_overlay">#9924384E</color>
 </resources>
