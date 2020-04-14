@@ -49,6 +49,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
                 android:layout_margin="8dp">
 
                 <LinearLayout
@@ -68,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="Strong to Serve">
+                        android:text="Knowledge is power ">
 
                     </TextView>
                 </LinearLayout>
@@ -97,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="@string/mission">
+                        android:text="@string/mission1">
 
                     </TextView>
                 </LinearLayout>
@@ -126,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="@string/vision">
+                        android:text="To Be a Center of Moral and Academic Excellence. ">
 
                     </TextView>
                 </LinearLayout>

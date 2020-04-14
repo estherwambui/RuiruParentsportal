@@ -13,15 +13,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.activities.LoginActivity;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
+import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -41,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        navMenuView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
     @Override
@@ -54,8 +59,10 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_account:
+                startActivity(new Intent(HomeActivity.this,AccountActivity.class));
                 break;
             case R.id.action_settings:
+
                 break;
             case R.id.action_logout:
                 SharedPrefsManager.getInstance(this).logoutUser();

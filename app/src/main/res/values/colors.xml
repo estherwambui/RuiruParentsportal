@@ -3,7 +3,7 @@
     <color name="colorPrimary">#065af1</color>`
     <color name="colorPrimaryDark">#065af1</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#F4F0F0</color>
     <color name="black">#000000</color>
     <color name="grey">#BABABA</color>
     <color name="red">#EF5350</color>
@@ -11,4 +11,5 @@
     <color name="maroon">#A35151</color>
     <color name="transparent">#00000000</color>
     <color name="black_overlay">#99000000</color>
+    <color name="blue_overlay">#9924384E</color>
 </resources>
