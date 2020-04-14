@@ -9,7 +9,7 @@ public class Student {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("adm_no")
+    @SerializedName("adm")
     @Expose
     private Integer admNo;
     @SerializedName("name")

@@ -1,4 +1,4 @@
-package com.example.ruiruparentsportal;
+package com.example.ruiruparentsportal.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.activities.LoginActivity;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
 import com.google.android.material.navigation.NavigationView;

@@ -33,6 +33,7 @@ public class AppUtils {
     public static final String LOGIN_TOKEN = "login_token";
     public static final String REGISTER_TOKEN = "register_token";
     public static final String GET_MY_STUDENTS_TOKEN = "get_my_students_token";
+    public static final String GET_NEWS_TOKEN = "get_news_token";
 
     private static final String TAG = "AppUtils";
     private static final String BASE_URL_OLD = "http://icelabs-eeyan.com/essie-parent-portal/";

@@ -69,6 +69,9 @@ public class Result implements Serializable {
     @SerializedName("students")
     @Expose
     private Integer students;
+    @SerializedName("student_name")
+    @Expose
+    private String student_name;
 
     public Integer getId() {
         return id;
@@ -236,5 +239,13 @@ public class Result implements Serializable {
 
     public void setStudents(Integer students) {
         this.students = students;
+    }
+
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
     }
 }

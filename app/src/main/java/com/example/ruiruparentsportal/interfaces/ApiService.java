@@ -1,5 +1,6 @@
 package com.example.ruiruparentsportal.interfaces;
 
+import com.example.ruiruparentsportal.model.NewsResponse;
 import com.example.ruiruparentsportal.response.ParentResponse;
 import com.example.ruiruparentsportal.response.ResultsResponse;
 import com.example.ruiruparentsportal.response.StudentResponse;
@@ -43,5 +44,11 @@ public interface ApiService {
             @Field("adm_no") Integer admNo,
             @Field("form") Integer form,
             @Field("term") Integer term
+    );
+
+    @FormUrlEncoded
+    @POST("functions.php")
+    Call<NewsResponse> getNewsArticles(
+            @Field("token") String token
     );
 }

@@ -1,8 +1,20 @@
 package com.example.ruiruparentsportal.fragments;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +29,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.example.ruiruparentsportal.R;
@@ -26,8 +40,14 @@ import com.example.ruiruparentsportal.model.Student;
 import com.example.ruiruparentsportal.response.ResultsResponse;
 import com.example.ruiruparentsportal.response.StudentResponse;
 import com.example.ruiruparentsportal.utils.AppUtils;
+import com.example.ruiruparentsportal.utils.FileUtil;
+import com.example.ruiruparentsportal.utils.ScreenshotUtil;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,10 +62,18 @@ public class ResultsFragment extends Fragment {
     private Spinner stName, term, form;
     private Integer spTerm, spForm, studentAdmNo;
     private ApiService service;
-    private TextView tvPosition, tvMeanGrade, math, eng, kisw, chem, phy, bio, hist, geo, agri, home_scie, business, cre;
+    private TextView tvPosition, tvMeanGrade, math, eng, kisw, chem, phy, bio, hist, geo,
+            agri, home_scie, business, cre, s_name, s_admno, s_form, tvterm;
     private ImageButton btnGetResults;
     private Button downloadTranscript;
     private ProgressBar resultsProgressBar, spinnerProgressBar;
+    private Bitmap bitmap;
+    private View parentViewPDF;
+    private boolean areResultsDisplayed;
+    private final int PERMISSION_REQUEST_CODE = 324;
+    private String str_name, str_adm, str_term;
+    private String pngPath, pdfPath; //Path to store screenshot
+    private static final String TAG = "ResultsFragment";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,10 +85,9 @@ public class ResultsFragment extends Fragment {
         return root;
     }
 
+
     private void setUpUserInterface(View root) {
         service = AppUtils.getApiService();
-
-
         stName = root.findViewById(R.id.spinnerName);
         term = root.findViewById(R.id.spinnerTerm);
         form = root.findViewById(R.id.spinnerForm);
@@ -80,13 +107,22 @@ public class ResultsFragment extends Fragment {
         agri = root.findViewById(R.id.tvAgri);
         business = root.findViewById(R.id.tvBusiness);
         home_scie = root.findViewById(R.id.tvHomSci);
+        s_name = root.findViewById(R.id.tvname);
+        s_admno = root.findViewById(R.id.tv_adm);
+        s_form = root.findViewById(R.id.tvform);
+        tvterm = root.findViewById(R.id.tvterm);
+        parentViewPDF = root.findViewById(R.id.parentPDFView);
         btnGetResults = root.findViewById(R.id.btnGetResults);
         downloadTranscript = root.findViewById(R.id.btnDownloadResults);
 
         downloadTranscript.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Download Complete", Toast.LENGTH_SHORT).show();
+                if (areResultsDisplayed) {
+                    pretendToDownloadPDF();
+                } else {
+                    Toast.makeText(getContext(), "Please load results first", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -143,6 +179,119 @@ public class ResultsFragment extends Fragment {
         getMyStudents();
     }
 
+    private void pretendToDownloadPDF() {
+        bitmap = ScreenshotUtil.getInstance().takeScreenshotForView(parentViewPDF); // Take ScreenshotUtil for any view
+        saveScreenShot(bitmap);
+    }
+
+    private void saveScreenShot(Bitmap bitmap) {
+        if (checkPermissionTrue()) {
+            if (bitmap != null) {
+                pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + ".png";
+                FileUtil.getInstance().storeBitmap(bitmap, pngPath);
+                generatePDF();
+            } else {
+                Toast.makeText(getContext(), "Failed to download results", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getContext(), "Requesting permissions", Toast.LENGTH_SHORT).show();
+            mRequestPermissions();
+        }
+    }
+
+    private void generatePDF() {
+        pdfPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + "_" + str_term + ".pdf";
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.parseColor("#ffffff"));
+        canvas.drawPaint(paint);
+
+        Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
+
+        paint.setColor(Color.BLUE);
+        canvas.drawBitmap(mBitmap, 0, 0, null);
+        document.finishPage(page);
+        File filePath = new File(pdfPath);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+            deleteScreenshot();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        // close the document
+        document.close();
+        Snackbar sn = Snackbar.make(resultsProgressBar, "Download complete. Open?", Snackbar.LENGTH_INDEFINITE);
+        sn.setAction("Open", v -> {
+            Toast.makeText(getContext(), "Opening document...", Toast.LENGTH_SHORT).show();
+            onResume();
+            new Handler().postDelayed(this::openPdf, 1000);
+        });
+        sn.show();
+    }
+
+    private void deleteScreenshot() {
+        pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + ".png";
+        File fileToBeDeleted = new File(pngPath);
+        try {
+            if (fileToBeDeleted.delete()) {
+                Log.i(TAG, "deleteScreenshot: Screenshot deleted");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openPdf() {
+        File pdfFile = new File(pdfPath);//File path
+        if (pdfFile.exists()) //Checking if the file exists or not
+        {
+            Uri mPath = FileProvider.getUriForFile(getContext(),
+                    getContext().getApplicationContext().getPackageName() + ".provider", pdfFile);
+            // Uri mPath = FileProvider.getUriForFile(getContext(), null, pdfFile);
+            Intent objIntent = new Intent(Intent.ACTION_VIEW);
+            objIntent.setDataAndType(mPath, "application/pdf");
+            objIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            objIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(objIntent);//Starting the pdf viewer
+        } else {
+            Toast.makeText(getActivity(), "The file not exists! ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                saveScreenShot(bitmap);
+            else {
+                Toast.makeText(getContext(), "Permission is denied", Toast.LENGTH_SHORT).show();
+                mRequestPermissions();
+            }
+        }
+    }
+
+    private void mRequestPermissions() {
+        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE},
+                PERMISSION_REQUEST_CODE);
+    }
+
+    private boolean checkPermissionTrue() {
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void getMyStudents() {
         showView(spinnerProgressBar);
         service.getMyStudents(AppUtils.GET_MY_STUDENTS_TOKEN,
@@ -193,6 +342,7 @@ public class ResultsFragment extends Fragment {
             public void onResponse(Call<ResultsResponse> call, Response<ResultsResponse> response) {
                 hideView(resultsProgressBar);
                 if (response.isSuccessful()) {
+                    areResultsDisplayed = true;
                     if (response.body().getError()) {
                         showErrorAlertDialog(response.body().getMessage(), false, false);
                     } else {
@@ -204,6 +354,7 @@ public class ResultsFragment extends Fragment {
                         }
                     }
                 } else {
+                    areResultsDisplayed = false;
                     Toast.makeText(getContext(), response.errorBody().toString(), Toast.LENGTH_SHORT).show();
                     showErrorAlertDialog("Could not retrieve results at the moment. Please try again later.", true, true);
                 }
@@ -211,6 +362,7 @@ public class ResultsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResultsResponse> call, Throwable t) {
+                areResultsDisplayed = false;
                 hideView(resultsProgressBar);
                 showErrorAlertDialog(t.getLocalizedMessage(), false, true);
             }
@@ -256,18 +408,25 @@ public class ResultsFragment extends Fragment {
             String studentPosition = result.getPosition() + " of " + result.getStudents();
             tvMeanGrade.setText(meanGrade);
             tvPosition.setText(studentPosition);
-            math.setText(!splitThis(result.getMaths())[1].equals("0") ? String.valueOf(result.getMaths()) : returnNA());
-            eng.setText(!splitThis(result.getEnglish())[1].equals("0") ? String.valueOf(result.getEnglish()) : returnNA());
-            kisw.setText(!splitThis(result.getKiswahili())[1].equals("0") ? String.valueOf(result.getKiswahili()) : returnNA());
-            chem.setText(!splitThis(result.getChemistry())[1].equals("0") ? String.valueOf(result.getChemistry()) : returnNA());
-            phy.setText(!splitThis(result.getPhysics())[1].equals("0") ? String.valueOf(result.getPhysics()) : returnNA());
-            bio.setText(!splitThis(result.getBiology())[1].equals("0") ? String.valueOf(result.getBiology()) : returnNA());
-            hist.setText(!splitThis(result.getHistory())[1].equals("0") ? String.valueOf(result.getHistory()) : returnNA());
-            geo.setText(!splitThis(result.getGeography())[1].equals("0") ? String.valueOf(result.getGeography()) : returnNA());
-            agri.setText(!splitThis(result.getAgriculture())[1].equals("0") ? String.valueOf(result.getAgriculture()) : returnNA());
+            math.setText(!splitThis(result.getMaths())[0].equals("0") ? String.valueOf(result.getMaths()) : returnNA());
+            eng.setText(!splitThis(result.getEnglish())[0].equals("0") ? String.valueOf(result.getEnglish()) : returnNA());
+            kisw.setText(!splitThis(result.getKiswahili())[0].equals("0") ? String.valueOf(result.getKiswahili()) : returnNA());
+            chem.setText(!splitThis(result.getChemistry())[0].equals("0") ? String.valueOf(result.getChemistry()) : returnNA());
+            phy.setText(!splitThis(result.getPhysics())[0].equals("0") ? String.valueOf(result.getPhysics()) : returnNA());
+            bio.setText(!splitThis(result.getBiology())[0].equals("0") ? String.valueOf(result.getBiology()) : returnNA());
+            hist.setText(!splitThis(result.getHistory())[0].equals("0") ? String.valueOf(result.getHistory()) : returnNA());
+            geo.setText(!splitThis(result.getGeography())[0].equals("0") ? String.valueOf(result.getGeography()) : returnNA());
+            agri.setText(!splitThis(result.getAgriculture())[0].equals("0") ? String.valueOf(result.getAgriculture()) : returnNA());
             business.setText(!splitThis(result.getBusiness())[1].equals("0") ? String.valueOf(result.getBusiness()) : returnNA());
-            cre.setText(!splitThis(result.getCre())[1].equals("0") ? String.valueOf(result.getCre()) : returnNA());
-            home_scie.setText(!splitThis(result.getHomeScience())[1].equals("0") ? String.valueOf(result.getHomeScience()) : returnNA());
+            cre.setText(!splitThis(result.getCre())[0].equals("0") ? String.valueOf(result.getCre()) : returnNA());
+            home_scie.setText(!splitThis(result.getHomeScience())[0].equals("0") ? String.valueOf(result.getHomeScience()) : returnNA());
+            s_name.setText(result.getStudent_name());
+            s_form.setText(result.getForm());
+            tvterm.setText(String.valueOf(result.getTerm()));
+            s_admno.setText(String.valueOf(result.getAdm_no()));
+            str_name = result.getStudent_name();
+            str_adm = String.valueOf(result.getAdm_no());
+            str_term = String.valueOf(result.getTerm());
         } catch (Exception e) {
             e.printStackTrace();
         }
