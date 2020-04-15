@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.AccountActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

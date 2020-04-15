@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        AppUtils.setStatusBarGradient(this);
+
         checkIfIsLoggedIn();
 
         service = AppUtils.getApiService();

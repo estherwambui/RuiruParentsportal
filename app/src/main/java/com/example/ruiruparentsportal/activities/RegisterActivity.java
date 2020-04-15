@@ -39,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        AppUtils.setStatusBarGradient(this);
+
         btnregister = findViewById(R.id.btnRegister);
         m_name = findViewById(R.id.edtName);
         m_email = findViewById(R.id.edtEmail);

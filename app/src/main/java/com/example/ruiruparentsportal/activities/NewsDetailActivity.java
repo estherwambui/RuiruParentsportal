@@ -1,8 +1,10 @@
-package com.example.ruiruparentsportal;
+package com.example.ruiruparentsportal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.ruiruparentsportal.R;
 
 public class NewsDetailActivity extends AppCompatActivity {
 

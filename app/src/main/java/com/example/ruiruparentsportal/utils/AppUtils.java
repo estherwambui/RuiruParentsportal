@@ -1,20 +1,42 @@
 package com.example.ruiruparentsportal.utils;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.interfaces.ApiService;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.text.NumberFormat;
@@ -34,10 +56,14 @@ public class AppUtils {
     public static final String REGISTER_TOKEN = "register_token";
     public static final String GET_MY_STUDENTS_TOKEN = "get_my_students_token";
     public static final String GET_NEWS_TOKEN = "get_news_token";
+    public static final String GET_FEE_STATUS_TOKEN = "fees_status_token";
+    public static final String GET_FEE_STRUCTURE_TOKEN = "fees_structure_token";
 
     private static final String TAG = "AppUtils";
     private static final String BASE_URL_OLD = "http://icelabs-eeyan.com/essie-parent-portal/";
     private static final String BASE_URL = "http://icelabs-eeyan.com/parent-portal/";
+    private static String pngPath, pdfPath;
+    private static Context context;
 
 
     public static ApiService getApiService() {
@@ -202,6 +228,92 @@ public class AppUtils {
             if (activity.getCurrentFocus() != null) {
                 inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
             }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradient(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.layout_background);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+
+    public static boolean checkPermissionTrue(Context context) {
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static void generatePDF(Context context, String filename, Bitmap bitmap, View snackBarView) {
+        AppUtils.context = context;
+        pdfPath = Environment.getExternalStorageDirectory() + "/rghs/" + filename + ".pdf";
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.parseColor("#ffffff"));
+        canvas.drawPaint(paint);
+
+        Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
+
+        paint.setColor(Color.BLUE);
+        canvas.drawBitmap(mBitmap, 0, 0, null);
+        document.finishPage(page);
+        File filePath = new File(pdfPath);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+            deleteScreenshot(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        // close the document
+        document.close();
+        Snackbar sn = Snackbar.make(snackBarView, "Download complete. Open?", Snackbar.LENGTH_INDEFINITE);
+        sn.setAction("Open", v -> {
+            Toast.makeText(context, "Opening document...", Toast.LENGTH_SHORT).show();
+            openPdf();
+        });
+        sn.show();
+    }
+
+    public static void deleteScreenshot(String filename) {
+        pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + filename + ".png";
+        File fileToBeDeleted = new File(pngPath);
+        try {
+            if (fileToBeDeleted.delete()) {
+                Log.i(TAG, "deleteScreenshot: Screenshot deleted");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void openPdf() {
+        File pdfFile = new File(pdfPath);//File path
+        if (pdfFile.exists()) //Checking if the file exists or not
+        {
+            Uri mPath = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", pdfFile);
+            // Uri mPath = FileProvider.getUriForFile(getContext(), null, pdfFile);
+            Intent objIntent = new Intent(Intent.ACTION_VIEW);
+            objIntent.setDataAndType(mPath, "application/pdf");
+            objIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            objIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            context.startActivity(objIntent);//Starting the pdf viewer
+        } else {
+            Toast.makeText(context, "The file not exists! ", Toast.LENGTH_SHORT).show();
         }
     }
 }

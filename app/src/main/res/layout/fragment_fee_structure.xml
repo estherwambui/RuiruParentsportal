@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/inputbackground"
+            android:background="@drawable/layout_background"
             android:orientation="vertical">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -112,7 +112,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="39dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
 
                         <TextView

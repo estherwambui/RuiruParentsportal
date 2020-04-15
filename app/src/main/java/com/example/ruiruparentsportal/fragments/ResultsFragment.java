@@ -29,7 +29,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -185,83 +184,18 @@ public class ResultsFragment extends Fragment {
     }
 
     private void saveScreenShot(Bitmap bitmap) {
-        if (checkPermissionTrue()) {
+        if (AppUtils.checkPermissionTrue(getContext())) {
             if (bitmap != null) {
+                String filename = "Term_" + str_term + "_" + str_name + "_" + str_adm;
                 pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + ".png";
                 FileUtil.getInstance().storeBitmap(bitmap, pngPath);
-                generatePDF();
+                AppUtils.generatePDF(getContext(), filename, bitmap, parentViewPDF);
             } else {
                 Toast.makeText(getContext(), "Failed to download results", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(getContext(), "Requesting permissions", Toast.LENGTH_SHORT).show();
             mRequestPermissions();
-        }
-    }
-
-    private void generatePDF() {
-        pdfPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + "_" + str_term + ".pdf";
-        PdfDocument document = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
-        PdfDocument.Page page = document.startPage(pageInfo);
-
-        Canvas canvas = page.getCanvas();
-
-        Paint paint = new Paint();
-        paint.setColor(Color.parseColor("#ffffff"));
-        canvas.drawPaint(paint);
-
-        Bitmap mBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
-
-        paint.setColor(Color.BLUE);
-        canvas.drawBitmap(mBitmap, 0, 0, null);
-        document.finishPage(page);
-        File filePath = new File(pdfPath);
-        try {
-            document.writeTo(new FileOutputStream(filePath));
-            deleteScreenshot();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(getContext(), "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
-        }
-
-        // close the document
-        document.close();
-        Snackbar sn = Snackbar.make(resultsProgressBar, "Download complete. Open?", Snackbar.LENGTH_INDEFINITE);
-        sn.setAction("Open", v -> {
-            Toast.makeText(getContext(), "Opening document...", Toast.LENGTH_SHORT).show();
-            onResume();
-            new Handler().postDelayed(this::openPdf, 1000);
-        });
-        sn.show();
-    }
-
-    private void deleteScreenshot() {
-        pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + ".png";
-        File fileToBeDeleted = new File(pngPath);
-        try {
-            if (fileToBeDeleted.delete()) {
-                Log.i(TAG, "deleteScreenshot: Screenshot deleted");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void openPdf() {
-        File pdfFile = new File(pdfPath);//File path
-        if (pdfFile.exists()) //Checking if the file exists or not
-        {
-            Uri mPath = FileProvider.getUriForFile(getContext(),
-                    getContext().getApplicationContext().getPackageName() + ".provider", pdfFile);
-            // Uri mPath = FileProvider.getUriForFile(getContext(), null, pdfFile);
-            Intent objIntent = new Intent(Intent.ACTION_VIEW);
-            objIntent.setDataAndType(mPath, "application/pdf");
-            objIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            objIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(objIntent);//Starting the pdf viewer
-        } else {
-            Toast.makeText(getActivity(), "The file not exists! ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -283,14 +217,6 @@ public class ResultsFragment extends Fragment {
                 PERMISSION_REQUEST_CODE);
     }
 
-    private boolean checkPermissionTrue() {
-        if (ActivityCompat.checkSelfPermission(getContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     private void getMyStudents() {
         showView(spinnerProgressBar);

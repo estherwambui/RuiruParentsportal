@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_backgroud"
-    tools:context=".AccountActivity">
+    android:background="@drawable/layout_background"
+    tools:context=".activities.AccountActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
