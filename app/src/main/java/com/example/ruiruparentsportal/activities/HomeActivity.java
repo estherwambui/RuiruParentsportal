@@ -36,17 +36,16 @@ public class HomeActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_results, R.id.nav_fee_status, R.id.nav_fee_structure, R.id.nav_news, R.id.nav_about)
+                R.id.nav_home, R.id.nav_results, R.id.nav_fee_status, R.id.nav_fee_structure, R.id.nav_news, R.id.nav_downloads, R.id.nav_about)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navMenuView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        //navMenuView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
     @Override

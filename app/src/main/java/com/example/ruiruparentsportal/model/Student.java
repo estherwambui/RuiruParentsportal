@@ -9,12 +9,12 @@ public class Student {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("adm")
-    @Expose
-    private Integer admNo;
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("adm")
+    @Expose
+    private Integer adm;
     @SerializedName("form")
     @Expose
     private String form;
@@ -33,20 +33,20 @@ public class Student {
         this.id = id;
     }
 
-    public Integer getAdmNo() {
-        return admNo;
-    }
-
-    public void setAdmNo(Integer admNo) {
-        this.admNo = admNo;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAdm() {
+        return adm;
+    }
+
+    public void setAdm(Integer adm) {
+        this.adm = adm;
     }
 
     public String getForm() {
@@ -76,6 +76,6 @@ public class Student {
     @NonNull
     @Override
     public String toString() {
-        return String.valueOf(this.admNo);
+        return String.valueOf(this.adm);
     }
 }

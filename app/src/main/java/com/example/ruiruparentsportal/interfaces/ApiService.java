@@ -9,11 +9,13 @@ import com.example.ruiruparentsportal.response.StudentResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiService {
     @FormUrlEncoded
-    @POST("login.php")
+    @POST("parent/login")
     Call<ParentResponse> loginParent(
             @Field("token") String token,
             @Field("phone") String phone,
@@ -31,32 +33,25 @@ public interface ApiService {
             @Field("password") String password);
 
 
-    @FormUrlEncoded
-    @POST("functions.php")
+    @GET("parent/students/{parent_id}")
     Call<StudentResponse> getMyStudents(
-            @Field("token") String token,
-            @Field("parent_id") Integer id
+            @Path("parent_id") Integer id
     );
 
     @FormUrlEncoded
-    @POST("functions.php")
+    @POST("student/results")
     Call<ResultsResponse> getResults(
-            @Field("token") String token,
-            @Field("adm_no") Integer admNo,
+            @Field("adm") Integer admNo,
             @Field("form") Integer form,
             @Field("term") Integer term
     );
 
-    @FormUrlEncoded
-    @POST("functions.php")
-    Call<NewsResponse> getNewsArticles(
-            @Field("token") String token
-    );
+    @GET("news/")
+    Call<NewsResponse> getNewsArticles();
 
     @FormUrlEncoded
-    @POST("functions.php")
+    @POST("/student/fees")
     Call<FeeStatusResponse> getFeeStatus(
-            @Field("token") String token,
             @Field("adm_no") Integer adm,
             @Field("form") Integer form,
             @Field("term") Integer term

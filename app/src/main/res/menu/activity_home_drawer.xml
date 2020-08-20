@@ -7,34 +7,39 @@
         <item
             android:id="@+id/nav_home"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_results"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_results"
             android:title="Results" />
 
         <item
             android:id="@+id/nav_fee_status"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_fees_status"
             android:title="Fees Status" />
 
         <item
             android:id="@+id/nav_fee_structure"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_fees_structure"
             android:title="Fees Structure" />
         <item
             android:id="@+id/nav_news"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_news"
             android:title="News And Events" />
+        <item
+            android:id="@+id/nav_downloads"
+            android:checkable="true"
+            android:icon="@drawable/ic_download"
+            android:title="Downloads" />
         <item
             android:id="@+id/nav_about"
             android:checkable="true"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_about"
             android:title="About" />
     </group>
 </menu>

@@ -192,8 +192,7 @@ public class FeeStatusFragment extends Fragment {
 
     private void getMyStudents() {
         showView(spinnerProgressBar);
-        service.getMyStudents(AppUtils.GET_MY_STUDENTS_TOKEN,
-                SharedPrefsManager.getInstance(getContext()).getParentId())
+        service.getMyStudents(SharedPrefsManager.getInstance(getContext()).getParentId())
                 .enqueue(new Callback<StudentResponse>() {
                     @Override
                     public void onResponse(Call<StudentResponse> call, Response<StudentResponse> response) {
@@ -270,7 +269,7 @@ public class FeeStatusFragment extends Fragment {
 
     private void loadFeeStatus() {
         showView(feeStatusProgressBar);
-        service.getFeeStatus(AppUtils.GET_FEE_STATUS_TOKEN, admNo, form, term)
+        service.getFeeStatus(admNo, form, term)
                 .enqueue(new Callback<FeeStatusResponse>() {
                     @Override
                     public void onResponse(Call<FeeStatusResponse> call, Response<FeeStatusResponse> response) {
@@ -304,21 +303,21 @@ public class FeeStatusFragment extends Fragment {
         Student t = null;
 
         for (Student s : myStudents) {
-            if (s.getAdmNo() == admNo) {
+            if (s.getAdm() == admNo) {
                 t = s;
                 break;
             }
         }
 
         tvStName.setText(t.getName());
-        tvStAdm.setText(String.valueOf(t.getAdmNo()));
+        tvStAdm.setText(String.valueOf(t.getAdm()));
         tvStForm.setText(String.valueOf(t.getForm()));
         tvBal.setText(String.valueOf(status.getBalance()));
         tvPaid.setText(String.valueOf(status.getPaid()));
         tvStForm.setText(String.valueOf(status.getTerm()));
         tvTotal.setText(String.valueOf(12890));
         str_name = t.getName();
-        str_adm = String.valueOf(t.getAdmNo());
+        str_adm = String.valueOf(t.getAdm());
         str_term = String.valueOf(status.getTerm());
     }
 }

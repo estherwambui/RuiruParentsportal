@@ -8,54 +8,87 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class NewsItem implements Serializable {
-    @SerializedName("title")
+    @SerializedName("id")
     @Expose
-    private String title;
-    @SerializedName("s_desc")
+    private Integer id;
+    @SerializedName("event")
     @Expose
-    private String sDesc;
-    @SerializedName("l_desc")
+    private String event;
+    @SerializedName("date")
     @Expose
-    private String lDesc;
-    @SerializedName("a_date")
+    private String date;
+    @SerializedName("published")
     @Expose
-    private String aDate;
+    private Integer published;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
 
-    public String getTitle() {
-        return title;
+    public Integer getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getSDesc() {
-        return sDesc;
+    public String getEvent() {
+        return event;
     }
 
-    public void setSDesc(String sDesc) {
-        this.sDesc = sDesc;
+    public void setEvent(String event) {
+        this.event = event;
     }
 
-    public String getLDesc() {
-        return lDesc;
+    public String getDate() {
+        return date;
     }
 
-    public void setLDesc(String lDesc) {
-        this.lDesc = lDesc;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getADate() {
-        return aDate;
+    public Integer getPublished() {
+        return published;
     }
 
-    public void setADate(String aDate) {
-        this.aDate = aDate;
+    public void setPublished(Integer published) {
+        this.published = published;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return this.title + " " + this.aDate;
+        return this.event + " " + this.date;
     }
 }

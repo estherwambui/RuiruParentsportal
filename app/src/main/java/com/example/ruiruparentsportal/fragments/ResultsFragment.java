@@ -2,17 +2,10 @@ package com.example.ruiruparentsportal.fragments;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +22,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.example.ruiruparentsportal.R;
@@ -42,27 +34,24 @@ import com.example.ruiruparentsportal.utils.AppUtils;
 import com.example.ruiruparentsportal.utils.FileUtil;
 import com.example.ruiruparentsportal.utils.ScreenshotUtil;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.ruiruparentsportal.utils.AppUtils.getGrade;
 import static com.example.ruiruparentsportal.utils.AppUtils.hideView;
 import static com.example.ruiruparentsportal.utils.AppUtils.showView;
-import static com.example.ruiruparentsportal.utils.AppUtils.splitThis;
 
 public class ResultsFragment extends Fragment {
-    private Spinner stName, term, form;
+    private Spinner spnAdm, spnTerm, spnForm;
     private Integer spTerm, spForm, studentAdmNo;
     private ApiService service;
     private TextView tvPosition, tvMeanGrade, math, eng, kisw, chem, phy, bio, hist, geo,
             agri, home_scie, business, cre, s_name, s_admno, s_form, tvterm;
+    private int position = 0, total = 0;
     private ImageButton btnGetResults;
     private Button downloadTranscript;
     private ProgressBar resultsProgressBar, spinnerProgressBar;
@@ -87,9 +76,9 @@ public class ResultsFragment extends Fragment {
 
     private void setUpUserInterface(View root) {
         service = AppUtils.getApiService();
-        stName = root.findViewById(R.id.spinnerName);
-        term = root.findViewById(R.id.spinnerTerm);
-        form = root.findViewById(R.id.spinnerForm);
+        spnAdm = root.findViewById(R.id.spinnerName);
+        spnTerm = root.findViewById(R.id.spinnerTerm);
+        spnForm = root.findViewById(R.id.spinnerForm);
         resultsProgressBar = root.findViewById(R.id.resultsProgressBar);
         spinnerProgressBar = root.findViewById(R.id.spinnerProgressBar);
         tvMeanGrade = root.findViewById(R.id.tvMeanGrade);
@@ -125,7 +114,7 @@ public class ResultsFragment extends Fragment {
             }
         });
 
-        stName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnAdm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 studentAdmNo = Integer.valueOf(parent.getSelectedItem().toString());
@@ -136,7 +125,7 @@ public class ResultsFragment extends Fragment {
 
             }
         });
-        term.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnTerm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spTerm = Integer.valueOf(parent.getSelectedItem().toString());
@@ -147,7 +136,7 @@ public class ResultsFragment extends Fragment {
 
             }
         });
-        form.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnForm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spForm = Integer.valueOf(parent.getSelectedItem().toString());
@@ -220,8 +209,7 @@ public class ResultsFragment extends Fragment {
 
     private void getMyStudents() {
         showView(spinnerProgressBar);
-        service.getMyStudents(AppUtils.GET_MY_STUDENTS_TOKEN,
-                SharedPrefsManager.getInstance(getContext()).getParentId())
+        service.getMyStudents(SharedPrefsManager.getInstance(getContext()).getParentId())
                 .enqueue(new Callback<StudentResponse>() {
                     @Override
                     public void onResponse(Call<StudentResponse> call, Response<StudentResponse> response) {
@@ -255,7 +243,7 @@ public class ResultsFragment extends Fragment {
             ArrayAdapter<Student> studentSpinner = new ArrayAdapter<>(getContext(),
                     android.R.layout.simple_spinner_dropdown_item, myStudents);
             studentSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            stName.setAdapter(studentSpinner);
+            spnAdm.setAdapter(studentSpinner);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -263,7 +251,7 @@ public class ResultsFragment extends Fragment {
 
     private void retrieveResultsFromServer(Integer adm_no, Integer term, Integer form) {
         showView(resultsProgressBar);
-        service.getResults("results_token", adm_no, form, term).enqueue(new Callback<ResultsResponse>() {
+        service.getResults(adm_no, form, term).enqueue(new Callback<ResultsResponse>() {
             @Override
             public void onResponse(Call<ResultsResponse> call, Response<ResultsResponse> response) {
                 hideView(resultsProgressBar);
@@ -273,8 +261,12 @@ public class ResultsFragment extends Fragment {
                         showErrorAlertDialog(response.body().getMessage(), false, false);
                     } else {
                         try {
-                            Result result = response.body().getResult();
-                            populateFields(result);
+                            position = response.body().getPosition();
+                            total = response.body().getTotal();
+                            Student currentStudent = response.body().getStudent();
+                            Result result = response.body().getResults();
+                            Log.e(TAG, "onResponse: result " + result);
+                            populateFields(currentStudent, result);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -328,37 +320,39 @@ public class ResultsFragment extends Fragment {
         dialog.show();
     }
 
-    private void populateFields(Result result) {
+    private void populateFields(Student currentStudent, Result result) {
         try {
             String meanGrade = result.getGrade() + " " + result.getMean();
-            String studentPosition = result.getPosition() + " of " + result.getStudents();
+            String studentPosition = position + " of " + total; //TODO: getPosition() - DONE
             tvMeanGrade.setText(meanGrade);
             tvPosition.setText(studentPosition);
-            math.setText(!splitThis(result.getMaths())[0].equals("0") ? String.valueOf(result.getMaths()) : returnNA());
-            eng.setText(!splitThis(result.getEnglish())[0].equals("0") ? String.valueOf(result.getEnglish()) : returnNA());
-            kisw.setText(!splitThis(result.getKiswahili())[0].equals("0") ? String.valueOf(result.getKiswahili()) : returnNA());
-            chem.setText(!splitThis(result.getChemistry())[0].equals("0") ? String.valueOf(result.getChemistry()) : returnNA());
-            phy.setText(!splitThis(result.getPhysics())[0].equals("0") ? String.valueOf(result.getPhysics()) : returnNA());
-            bio.setText(!splitThis(result.getBiology())[0].equals("0") ? String.valueOf(result.getBiology()) : returnNA());
-            hist.setText(!splitThis(result.getHistory())[0].equals("0") ? String.valueOf(result.getHistory()) : returnNA());
-            geo.setText(!splitThis(result.getGeography())[0].equals("0") ? String.valueOf(result.getGeography()) : returnNA());
-            agri.setText(!splitThis(result.getAgriculture())[0].equals("0") ? String.valueOf(result.getAgriculture()) : returnNA());
-            business.setText(!splitThis(result.getBusiness())[1].equals("0") ? String.valueOf(result.getBusiness()) : returnNA());
-            cre.setText(!splitThis(result.getCre())[0].equals("0") ? String.valueOf(result.getCre()) : returnNA());
-            home_scie.setText(!splitThis(result.getHomeScience())[0].equals("0") ? String.valueOf(result.getHomeScience()) : returnNA());
-            s_name.setText(result.getStudent_name());
-            s_form.setText(result.getForm());
+            math.setText(isZeroToNA(result.getMaths()));
+            eng.setText(isZeroToNA(result.getEnglish()));
+            kisw.setText(isZeroToNA(result.getKiswahili()));
+            chem.setText(isZeroToNA(result.getChemistry()));
+            phy.setText(isZeroToNA(result.getPhysics()));
+            bio.setText(isZeroToNA(result.getBiology()));
+            hist.setText(isZeroToNA(result.getHistory()));
+            geo.setText(isZeroToNA(result.getGeography()));
+            agri.setText(isZeroToNA(result.getAgriculture()));
+            business.setText(isZeroToNA(result.getBusinessStudies()));
+            cre.setText(isZeroToNA(result.getCre()));
+            home_scie.setText(isZeroToNA(result.getHomeScience()));
+
+            s_name.setText(currentStudent.getName());
+            s_form.setText(spnForm.getSelectedItem().toString());
             tvterm.setText(String.valueOf(result.getTerm()));
-            s_admno.setText(String.valueOf(result.getAdm_no()));
-            str_name = result.getStudent_name();
-            str_adm = String.valueOf(result.getAdm_no());
-            str_term = String.valueOf(result.getTerm());
+            s_admno.setText(spnAdm.getSelectedItem().toString());
+
+            str_name = currentStudent.getName();
+            str_adm = spnAdm.getSelectedItem().toString();
+            str_term = spnTerm.getSelectedItem().toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private String returnNA() {
-        return "-";
+    private String isZeroToNA(int score) {
+        return score != 0 ? getGrade(score) : "-";
     }
 }

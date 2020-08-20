@@ -1,5 +1,6 @@
 package com.example.ruiruparentsportal.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ruiruparentsportal.R;
+import com.example.ruiruparentsportal.activities.NewsDetailActivity;
 import com.example.ruiruparentsportal.adapter.NewsAdapter;
 import com.example.ruiruparentsportal.interfaces.ApiService;
 import com.example.ruiruparentsportal.model.NewsItem;
@@ -55,7 +57,7 @@ public class NewsAndEventsFragment extends Fragment {
 
     private void retrieveNews() {
         mSwipeRefreshLayout.setRefreshing(true);
-        service.getNewsArticles(AppUtils.GET_NEWS_TOKEN).enqueue(new Callback<NewsResponse>() {
+        service.getNewsArticles().enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -81,5 +83,11 @@ public class NewsAndEventsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         Log.w(TAG, "populateData: Adding data: " + articles.size());
         adapter.notifyDataSetChanged();
+
+        adapter.setOnItemClickLisener((position, newsItem) -> {
+            Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+            intent.putExtra("news", newsItem);
+            startActivity(intent);
+        });
     }
 }

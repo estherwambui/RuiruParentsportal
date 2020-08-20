@@ -32,6 +32,7 @@ import androidx.core.content.FileProvider;
 
 import com.example.ruiruparentsportal.R;
 import com.example.ruiruparentsportal.interfaces.ApiService;
+import com.example.ruiruparentsportal.model.PDFDownload;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -42,8 +43,10 @@ import java.security.MessageDigest;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static android.view.View.GONE;
@@ -61,7 +64,7 @@ public class AppUtils {
 
     private static final String TAG = "AppUtils";
     private static final String BASE_URL_OLD = "http://icelabs-eeyan.com/essie-parent-portal/";
-    private static final String BASE_URL = "http://icelabs-eeyan.com/parent-portal/";
+    private static final String BASE_URL = "http://192.168.20.31:8000/api/";
     private static String pngPath, pdfPath;
     private static Context context;
 
@@ -86,6 +89,34 @@ public class AppUtils {
         tv_message.setText(message);
         toast.show();
     }*/
+
+    public static String getGrade(int score) {
+        if (score >= 80) {
+            return score + " A";
+        } else if (score >= 75) {
+            return score + " A-";
+        } else if (score >= 70) {
+            return score + " B+";
+        } else if (score >= 65) {
+            return score + " B";
+        } else if (score >= 60) {
+            return score + " B-";
+        } else if (score >= 55) {
+            return score + " C+";
+        } else if (score >= 50) {
+            return score + " C";
+        } else if (score >= 45) {
+            return score + " C-";
+        } else if (score >= 40) {
+            return score + " D+";
+        } else if (score >= 35) {
+            return score + " D";
+        } else if (score >= 30) {
+            return score + " D-";
+        } else {
+            return score + " E";
+        }
+    }
 
     public static String md5(String s) {
         try {
@@ -115,7 +146,7 @@ public class AppUtils {
 
     public static String formatDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
-        SimpleDateFormat fromInput = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat fromInput = new SimpleDateFormat("yyyy-MM-dd");//2020-11-17
 
         String reformattedStr = "";
         String mDate = "";
@@ -127,11 +158,11 @@ public class AppUtils {
         try {
             Date fromUser = fromInput.parse(mDate);
             reformattedStr = dateFormat.format(fromUser);
+            return reformattedStr;
         } catch (ParseException e) {
             e.printStackTrace();
+            return date;
         }
-
-        return reformattedStr;
     }
 
 
@@ -254,7 +285,7 @@ public class AppUtils {
 
     public static void generatePDF(Context context, String filename, Bitmap bitmap, View snackBarView) {
         AppUtils.context = context;
-        pdfPath = Environment.getExternalStorageDirectory() + "/rghs/" + filename + ".pdf";
+        pdfPath = context.getExternalFilesDir("rghs/").getAbsolutePath();
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
@@ -271,8 +302,19 @@ public class AppUtils {
         canvas.drawBitmap(mBitmap, 0, 0, null);
         document.finishPage(page);
         File filePath = new File(pdfPath);
+        File pdfFile = new File(filePath, filename + ".pdf");
+
+        if (!filePath.exists()) {
+            filePath.mkdirs();
+            try {
+                pdfFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
-            document.writeTo(new FileOutputStream(filePath));
+            document.writeTo(new FileOutputStream(pdfFile));
             deleteScreenshot(filename);
         } catch (IOException e) {
             e.printStackTrace();
@@ -281,10 +323,10 @@ public class AppUtils {
 
         // close the document
         document.close();
-        Snackbar sn = Snackbar.make(snackBarView, "Download complete. Open?", Snackbar.LENGTH_INDEFINITE);
+        Snackbar sn = Snackbar.make(snackBarView, "Download complete", Snackbar.LENGTH_INDEFINITE);
         sn.setAction("Open", v -> {
             Toast.makeText(context, "Opening document...", Toast.LENGTH_SHORT).show();
-            openPdf();
+            openPdf(context, pdfFile);
         });
         sn.show();
     }
@@ -301,8 +343,7 @@ public class AppUtils {
         }
     }
 
-    public static void openPdf() {
-        File pdfFile = new File(pdfPath);//File path
+    public static void openPdf(Context context, File pdfFile) {
         if (pdfFile.exists()) //Checking if the file exists or not
         {
             Uri mPath = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", pdfFile);
@@ -315,5 +356,18 @@ public class AppUtils {
         } else {
             Toast.makeText(context, "The file not exists! ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static List<PDFDownload> getDownloadedFiles(Context context) {
+        String downloadsPath = context.getExternalFilesDir("rghs/").getAbsolutePath();
+        List<PDFDownload> pdfDownloads = new ArrayList<>();
+        File[] files = new File(downloadsPath).listFiles();
+
+        for (File f : files) {
+            PDFDownload pdfDownload = new PDFDownload(f.getName());
+            pdfDownloads.add(pdfDownload);
+        }
+
+        return pdfDownloads;
     }
 }

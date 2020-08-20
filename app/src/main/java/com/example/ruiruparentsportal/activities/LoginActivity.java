@@ -78,17 +78,17 @@ public class LoginActivity extends AppCompatActivity {
         AppUtils.showView(loginProgressBar);
         //Send login request to server - DONE
         //TODO: Remember to use md5 for password
-        service.loginParent(AppUtils.LOGIN_TOKEN, phone, AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
+        service.loginParent(AppUtils.LOGIN_TOKEN, phone, password).enqueue(new Callback<ParentResponse>() {
             @Override
             public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
                 AppUtils.hideView(loginProgressBar);
                 if (response.isSuccessful()) {
                     try {
                         if (response.body().isError()) {
-                            Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
                             Parent parent = response.body().getParent();
-                            Toast.makeText(LoginActivity.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             SharedPrefsManager.getInstance(LoginActivity.this).userLogin(parent.getId(), parent.getName(),
                                     parent.getEmail(), parent.getPhone(), true);
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
