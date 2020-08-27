@@ -61,7 +61,7 @@ public class FeeStatusFragment extends Fragment {
     private List<Student> myStudents = new ArrayList<>();
     private Button btnDownloadResults;
     private final int PERMISSION_REQUEST_CODE = 324;
-    private String str_name, str_adm, str_term;
+    private String str_name, str_adm, str_term, str_form;
     private String pngPath; //Path to store screenshot
 
     public FeeStatusFragment() {
@@ -159,7 +159,7 @@ public class FeeStatusFragment extends Fragment {
     private void saveScreenShot(Bitmap bitmap) {
         if (AppUtils.checkPermissionTrue(getContext())) {
             if (bitmap != null) {
-                String filename = "Status_" + str_term + "_" + str_name + "_" + str_adm;
+                String filename = "Fee Status F" + str_form +" T" + str_term + "_" + str_name;
                 pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + str_name + "_" + str_adm + ".png";
                 FileUtil.getInstance().storeBitmap(bitmap, pngPath);
                 AppUtils.generatePDF(getContext(), filename, bitmap, parentViewPDF);
@@ -321,6 +321,7 @@ public class FeeStatusFragment extends Fragment {
         str_name = t.getName();
         str_adm = String.valueOf(t.getAdm());
         str_term = String.valueOf(status.getTerm());
+        str_form = String.valueOf(status.getForm());
     }
 
     private String stringify(int raw) {

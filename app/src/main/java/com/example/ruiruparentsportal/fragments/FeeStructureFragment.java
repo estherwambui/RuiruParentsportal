@@ -213,8 +213,8 @@ public class FeeStructureFragment extends Fragment {
     private void saveScreenShot(Bitmap bitmap) {
         if (AppUtils.checkPermissionTrue(getContext())) {
             if (bitmap != null) {
-                String filename = "Fee_Structure_F" + form + "_T" + term;
-                pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + "Fee_Structure_F" + form + "_T" + term + ".png ";
+                String filename = "Fee Structure F" + form + " T" + term;
+                pngPath = Environment.getExternalStorageDirectory() + "/rghs/" + "Fee Structure F" + form + " T" + term + ".png ";
                 FileUtil.getInstance().storeBitmap(bitmap, pngPath);
                 AppUtils.generatePDF(getContext(), filename, bitmap, parentViewPDF);
             } else {
