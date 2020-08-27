@@ -32,10 +32,10 @@ import com.example.ruiruparentsportal.utils.AppUtils;
 import com.example.ruiruparentsportal.utils.FileUtil;
 import com.example.ruiruparentsportal.utils.ScreenshotUtil;
 import com.example.ruiruparentsportal.utils.SharedPrefsManager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -314,12 +314,16 @@ public class FeeStatusFragment extends Fragment {
         tvStName.setText(t.getName());
         tvStAdm.setText(String.valueOf(t.getAdm()));
         tvStForm.setText(String.valueOf(t.getForm()));
-        tvBal.setText(String.valueOf(status.getBalance()));
-        tvPaid.setText(String.valueOf(status.getPaid()));
+        tvBal.setText(stringify(status.getBalance()));
+        tvPaid.setText(stringify(status.getPaid()));
         tvStForm.setText(String.valueOf(status.getTerm()));
-        tvTotal.setText(String.valueOf(12890));
+        tvTotal.setText(stringify(status.getExpected()));
         str_name = t.getName();
         str_adm = String.valueOf(t.getAdm());
         str_term = String.valueOf(status.getTerm());
+    }
+
+    private String stringify(int raw) {
+        return String.format(Locale.US, "%,d", raw);
     }
 }

@@ -56,7 +56,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("fees/status")
     Call<FeeStatusResponse> getFeeStatus(
-            @Field("adm_no") Integer adm,
+            @Field("adm") Integer adm,
             @Field("form") Integer form,
             @Field("term") Integer term
     );

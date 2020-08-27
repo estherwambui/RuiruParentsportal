@@ -1,5 +1,7 @@
-package com.example.ruiruparentsportal.model;
+package com.example.ruiruparentsportal.response;
 
+import com.example.ruiruparentsportal.model.FeeStructure;
+import com.example.ruiruparentsportal.model.FeesStatus;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +14,7 @@ public class FeeStatusResponse {
     private String message;
     @SerializedName("feeStatus")
     @Expose
-    private FeesStatus feesStatus;
+    private FeesStatus feeStatus;
 
     public Boolean getError() {
         return error;
@@ -30,11 +32,11 @@ public class FeeStatusResponse {
         this.message = message;
     }
 
-    public FeesStatus getFeesStatus() {
-        return feesStatus;
+    public FeesStatus getFeeStructure() {
+        return feeStatus;
     }
 
-    public void setFeesStatus(FeesStatus feesStatus) {
-        this.feesStatus = feesStatus;
+    public void setFeeStructure(FeesStatus feeStructure) {
+        this.feeStatus = feeStructure;
     }
 }
