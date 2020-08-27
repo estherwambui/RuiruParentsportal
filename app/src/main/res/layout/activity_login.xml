@@ -103,11 +103,12 @@
                     android:text="Login" />
 
                 <TextView
-                    android:id="@+id/tvCreateAccount"
+                    android:id="@+id/tvForgotPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Create Account?"
+                    android:padding="8dp"
+                    android:text="Forgot Password?"
                     android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>

@@ -256,10 +256,10 @@ public class ResultsFragment extends Fragment {
             public void onResponse(Call<ResultsResponse> call, Response<ResultsResponse> response) {
                 hideView(resultsProgressBar);
                 if (response.isSuccessful()) {
-                    areResultsDisplayed = true;
                     if (response.body().getError()) {
                         showErrorAlertDialog(response.body().getMessage(), false, false);
                     } else {
+                        areResultsDisplayed = true;
                         try {
                             position = response.body().getPosition();
                             total = response.body().getTotal();

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -58,7 +59,7 @@ public class FeeStatusFragment extends Fragment {
     private Bitmap bitmap;
     private View parentViewPDF;
     private List<Student> myStudents = new ArrayList<>();
-    private FloatingActionButton downloadFeeStatus;
+    private Button btnDownloadResults;
     private final int PERMISSION_REQUEST_CODE = 324;
     private String str_name, str_adm, str_term;
     private String pngPath; //Path to store screenshot
@@ -89,7 +90,7 @@ public class FeeStatusFragment extends Fragment {
         parentViewPDF = v.findViewById(R.id.parentPDFView);
         feeStatusProgressBar = v.findViewById(R.id.feeStatusProgressBar);
         spinnerProgressBar = v.findViewById(R.id.sProgressBar);
-        downloadFeeStatus = v.findViewById(R.id.downloadFeeStatus);
+        btnDownloadResults = v.findViewById(R.id.btnDownloadResults);
 
         setUpUI();
 
@@ -138,7 +139,7 @@ public class FeeStatusFragment extends Fragment {
             loadFeeStatus();
         });
 
-        downloadFeeStatus.setOnClickListener(new View.OnClickListener() {
+        btnDownloadResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isStatusDisplayed) {
@@ -269,6 +270,7 @@ public class FeeStatusFragment extends Fragment {
 
     private void loadFeeStatus() {
         showView(feeStatusProgressBar);
+        isStatusDisplayed = false;
         service.getFeeStatus(admNo, form, term)
                 .enqueue(new Callback<FeeStatusResponse>() {
                     @Override

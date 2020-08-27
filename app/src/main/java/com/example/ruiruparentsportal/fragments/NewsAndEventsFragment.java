@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +23,7 @@ import com.example.ruiruparentsportal.model.NewsItem;
 import com.example.ruiruparentsportal.model.NewsResponse;
 import com.example.ruiruparentsportal.utils.AppUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,8 @@ public class NewsAndEventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private static final String TAG = "NewsAndEventsFragment";
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private RelativeLayout rlNoNews;
+    private ArrayList<NewsItem> newsItemArrayList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +45,25 @@ public class NewsAndEventsFragment extends Fragment {
         service = AppUtils.getApiService();
         recyclerView = root.findViewById(R.id.newsRecyclerView);
         mSwipeRefreshLayout = root.findViewById(R.id.mSwipeRefreshLayout);
+        rlNoNews = root.findViewById(R.id.rlNoNews);
+
+        initUI();
 
         retrieveNews();
+
+        return root;
+    }
+
+    private void initUI() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new NewsAdapter(newsItemArrayList, getContext());
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickLisener((position, newsItem) -> {
+            Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+            intent.putExtra("news", newsItem);
+            startActivity(intent);
+        });
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -51,8 +71,6 @@ public class NewsAndEventsFragment extends Fragment {
                 retrieveNews();
             }
         });
-
-        return root;
     }
 
     private void retrieveNews() {
@@ -62,8 +80,16 @@ public class NewsAndEventsFragment extends Fragment {
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 if (response.isSuccessful()) {
-                    populateData(response.body().getArticles());
-                    Log.w(TAG, "onResponse: Populating data: " + response.body().getArticles());
+                    newsItemArrayList.clear();
+                    AppUtils.hideView(rlNoNews);
+
+                    if (!response.body().getError()) {
+                        newsItemArrayList.addAll(response.body().getArticles());
+                    } else {
+                        AppUtils.showView(rlNoNews);
+                    }
+
+                    adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getContext(), "An error has occurred!", Toast.LENGTH_SHORT).show();
                 }
@@ -77,17 +103,4 @@ public class NewsAndEventsFragment extends Fragment {
         });
     }
 
-    private void populateData(List<NewsItem> articles) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new NewsAdapter(articles, getContext());
-        recyclerView.setAdapter(adapter);
-        Log.w(TAG, "populateData: Adding data: " + articles.size());
-        adapter.notifyDataSetChanged();
-
-        adapter.setOnItemClickLisener((position, newsItem) -> {
-            Intent intent = new Intent(getContext(), NewsDetailActivity.class);
-            intent.putExtra("news", newsItem);
-            startActivity(intent);
-        });
-    }
 }

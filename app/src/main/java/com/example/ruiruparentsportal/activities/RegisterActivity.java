@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         AppUtils.showView(registerProgressorbar);
         //Send login request to server - DONE
         //TODO: Remember to use md5 for password
-        service.registerParent(AppUtils.REGISTER_TOKEN, name, email, phone, AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
+        /*service.registerParent(AppUtils.REGISTER_TOKEN, name, email, phone, AppUtils.md5(password)).enqueue(new Callback<ParentResponse>() {
             @Override
             public void onResponse(Call<ParentResponse> call, Response<ParentResponse> response) {
                 AppUtils.hideView(registerProgressorbar);
@@ -132,6 +132,6 @@ public class RegisterActivity extends AppCompatActivity {
                 AppUtils.hideView(registerProgressorbar);
                 Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }

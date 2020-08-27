@@ -4,6 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/structureProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -41,8 +53,10 @@
                         </TextView>
 
                         <Spinner
+                            android:id="@+id/spnTermStruct"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:entries="@array/terms">
 
                         </Spinner>
 
@@ -62,18 +76,29 @@
                         </TextView>
 
                         <Spinner
+                            android:id="@+id/spnFormStruct"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:entries="@array/forms">
 
                         </Spinner>
 
                     </LinearLayout>
 
+                    <ImageButton
+                        android:id="@+id/btnGetStructure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_arrow_forward" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cvFeeStructure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -109,6 +134,29 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="Email: rghs@gmail.com " />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tv_m_term"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Term" />
+
+                        <TextView
+                            android:id="@+id/tv_m_form"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Form " />
+
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -153,11 +201,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvTuition"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="1"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -178,11 +228,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvRegistration"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
 
                             android:textSize="21sp">
 
@@ -204,11 +256,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvLibrary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -229,11 +283,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvActivity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -254,11 +310,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvExams"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -279,11 +337,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvDevt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
 
                             android:textSize="21sp">
 
@@ -305,11 +365,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvMentorship"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -330,11 +392,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvCautionMoney"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -355,11 +419,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvStudID"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -380,11 +446,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvClubs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -405,11 +473,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvBoarding"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -431,11 +501,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tvTotalFee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="345"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:textSize="21sp">
 
                         </TextView>
@@ -481,6 +553,14 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <Button
+                android:id="@+id/btnDownloadStructure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="Download Fee Structure" />
         </LinearLayout>
 
     </ScrollView>

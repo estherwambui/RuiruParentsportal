@@ -65,6 +65,7 @@ public class AppUtils {
     private static final String TAG = "AppUtils";
     private static final String BASE_URL_OLD = "http://icelabs-eeyan.com/essie-parent-portal/";
     private static final String BASE_URL = "http://192.168.20.31:8000/api/";
+    //private static final String BASE_URL = "http://192.168.1.145:8000/api/";
     private static String pngPath, pdfPath;
     private static Context context;
 
@@ -92,29 +93,29 @@ public class AppUtils {
 
     public static String getGrade(int score) {
         if (score >= 80) {
-            return score + " A";
+            return "A  " + score;
         } else if (score >= 75) {
-            return score + " A-";
+            return "A- " + score;
         } else if (score >= 70) {
-            return score + " B+";
+            return "B+ " + score;
         } else if (score >= 65) {
-            return score + " B";
+            return "B  " + score;
         } else if (score >= 60) {
-            return score + " B-";
+            return "B- " + score;
         } else if (score >= 55) {
-            return score + " C+";
+            return "C+ " + score;
         } else if (score >= 50) {
-            return score + " C";
+            return "C  " + score;
         } else if (score >= 45) {
-            return score + " C-";
+            return "C- " + score;
         } else if (score >= 40) {
-            return score + " D+";
+            return "D+ " + score;
         } else if (score >= 35) {
-            return score + " D";
+            return "D  " + score;
         } else if (score >= 30) {
-            return score + " D-";
+            return "D- " + score;
         } else {
-            return score + " E";
+            return "E  " + score;
         }
     }
 
@@ -323,7 +324,7 @@ public class AppUtils {
 
         // close the document
         document.close();
-        Snackbar sn = Snackbar.make(snackBarView, "Download complete", Snackbar.LENGTH_INDEFINITE);
+        Snackbar sn = Snackbar.make(snackBarView, "Download complete", Snackbar.LENGTH_LONG);
         sn.setAction("Open", v -> {
             Toast.makeText(context, "Opening document...", Toast.LENGTH_SHORT).show();
             openPdf(context, pdfFile);

@@ -35,7 +35,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public NewsAdapter(List<NewsItem> newsItemList, Context context) {
         this.newsItemList = newsItemList;
         this.context = context;
-        Log.e(TAG, "NewsAdapter: Adapter data: " + newsItemList.size());
     }
 
     @NonNull
